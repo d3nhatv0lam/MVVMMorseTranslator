@@ -13,6 +13,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
     public class MainViewModel : ViewModelBase
     {
         private ICommand _changePageCommand;
+        // BaseViewmodel to multi sceen
         private ViewModelBase _currentViewModel;
         private List<ViewModelBase> _pageViewModels;
 
