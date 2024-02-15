@@ -1,0 +1,39 @@
+﻿<Window x:Class="MVVMMorseTranslator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMMorseTranslator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+
+            <RadioButton Content="MainWindow"
+                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                        CommandParameter="{Binding PageViewModels[0]}"
+                         IsChecked="True"
+                  ></RadioButton>
+            <RadioButton Content="Setting"
+                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                      
+                        CommandParameter="{Binding PageViewModels[1]}"
+           ></RadioButton>
+
+
+        </StackPanel>
+
+
+        <ContentControl Grid.Column="1"  Content="{Binding CurrentViewModel}" />
+    </Grid>
+
+
+
+</Window>
