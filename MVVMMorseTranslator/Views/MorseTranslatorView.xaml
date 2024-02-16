@@ -7,9 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="750">
 
-    <UserControl.Resources>
-        
-    </UserControl.Resources>
     
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -19,13 +16,13 @@
         <WrapPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="15 30 0 0 " Width="500">
                 <Label Content="Alphabet" FontSize="50"></Label>
-                <TextBox Text="{Binding Alphabet,  UpdateSourceTrigger=PropertyChanged}" FontSize="50"></TextBox>
+                <TextBox Text="{Binding Alphabet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="50"></TextBox>
 
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="15 30 0 0" Width="500">
                 <Label Content="MorseCode" FontSize="50"></Label>
-                <TextBox Text="{Binding MorseCode , UpdateSourceTrigger=PropertyChanged}" FontSize="50"></TextBox>
+                <TextBox Text="{Binding MorseCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="50"></TextBox>
             </StackPanel>
         </WrapPanel>
         

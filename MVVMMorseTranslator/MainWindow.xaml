@@ -12,27 +12,27 @@
     <Grid> 
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
 
-            <RadioButton Content="MainWindow"
-                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+            <RadioButton Content="MainWindow" FontSize="20"
+                        Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                         CommandParameter="{Binding PageViewModels[0]}"
-                         IsChecked="True"
-                  ></RadioButton>
-            <RadioButton Content="Setting"
+                        IsChecked="True"
+            ></RadioButton>
+
+            <RadioButton Content="Setting" FontSize="20"
                          Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                      
                         CommandParameter="{Binding PageViewModels[1]}"
-           ></RadioButton>
-
+             ></RadioButton>
 
         </StackPanel>
 
 
-        <ContentControl Grid.Column="1"  Content="{Binding CurrentViewModel}" />
+        <ContentControl Grid.Column="1"  Content="{Binding CurrentViewModel , UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 
 

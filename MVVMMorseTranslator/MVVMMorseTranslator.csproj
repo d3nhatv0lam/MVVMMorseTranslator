@@ -131,6 +131,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MorseTranslatorModel.cs" />
     <Compile Include="ViewModels\Base\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MorseTranslatorViewModel.cs" />
