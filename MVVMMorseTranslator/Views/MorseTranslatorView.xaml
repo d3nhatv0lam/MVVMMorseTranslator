@@ -22,6 +22,7 @@
 
             <StackPanel Orientation="Vertical" Margin="15 30 0 0" Width="500">
                 <Label Content="MorseCode" FontSize="50"></Label>
+                <Button Content="Delete File" Command="{Binding DeleteAudio}" ></Button>
                 <TextBox Text="{Binding MorseCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="50"></TextBox>
             </StackPanel>
         </WrapPanel>

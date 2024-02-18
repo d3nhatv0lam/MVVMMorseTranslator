@@ -9,12 +9,16 @@ using System.Windows.Controls.Primitives;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MVVMMorseTranslator.Models;
 using System.Threading;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MVVMMorseTranslator.ViewModels
 {
     public class MorseTranslatorViewModel : ViewModelBase
     {
+        private ICommand _deleteAudio;
         private readonly MorseTranslatorModel _morse = new MorseTranslatorModel();
+        private readonly MorseAudioModel _morseAudio = new MorseAudioModel();
 
         public String Alphabet
         {
@@ -34,6 +38,39 @@ namespace MVVMMorseTranslator.ViewModels
             {
                 _morse.MorseCode = value;
                 OnPropertyChanged(nameof(Alphabet));
+            }
+        }
+
+        public int WPM
+        {
+            get => _morseAudio.WPM;
+            set 
+            {
+                _morseAudio.WPM = value;
+            }
+        }
+
+        public int Frequency
+        {
+            get => _morseAudio.Frequency;
+            set
+            {
+                _morseAudio.Frequency = value;
+            }
+        }
+
+        public ICommand DeleteAudio
+        {
+            get
+            {
+                if (_deleteAudio == null)
+                {
+                    _deleteAudio = new RelayCommand(() =>
+                    {
+                        _morseAudio.DeleteMusicFromDisk();
+                    });
+                }
+                return _deleteAudio;
             }
         }
 
