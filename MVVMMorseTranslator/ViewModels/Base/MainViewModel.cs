@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -13,15 +15,12 @@ namespace MVVMMorseTranslator.ViewModels.Base
     public class MainViewModel : ViewModelBase
     {
         private ICommand _changePageCommand;
-        // BaseViewmodel to multi sceen ???
-        private ViewModelBase _currentViewModel;
-        private List<ViewModelBase> _pageViewModels;
+        private ICommand _minimizeApp;
+        private ICommand _restoreApp;
+        private ICommand _closeApp;
 
-        public enum PageName
-        {
-            MorseTranslatorViewModel,
-            SettingViewModel
-        }
+        private List<ViewModelBase> _pageViewModels;
+        private ViewModelBase _currentViewModel;
 
         public MainViewModel()
         {
@@ -30,7 +29,6 @@ namespace MVVMMorseTranslator.ViewModels.Base
             PageViewModels.Add(new SettingViewModel() );
 
             CurrentViewModel = PageViewModels.First();
-
         }
 
         public ICommand ChangePageCommand
@@ -44,6 +42,57 @@ namespace MVVMMorseTranslator.ViewModels.Base
                          p => true);
                 }
                 return _changePageCommand;
+            }
+        }
+
+        public ICommand MinimizeApp
+        {
+            get
+            {
+                if (_minimizeApp == null)
+                {
+                    _minimizeApp = new RelayCommand(() =>
+                    {
+                        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                    });
+                }
+                return _minimizeApp;
+            }
+        }
+        public ICommand RestoreApp
+        {
+            get
+            {
+                if (_restoreApp == null)
+                {
+                    _restoreApp = new RelayCommand(() =>
+                    {
+                        if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+                        {
+                            Application.Current.MainWindow.WindowState = WindowState.Normal;
+                        } else
+                        {
+                            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                        }
+                    });
+                }
+                return _restoreApp;
+            }
+        }
+
+        public ICommand CloseApp
+        {
+            get
+            {
+                if (_closeApp == null)
+                {
+                    _closeApp = new RelayCommand(() =>
+                    {
+                        ((MorseTranslatorViewModel)PageViewModels[0]).DeleteAudio.Execute(null);
+                        Application.Current.Shutdown();
+                    });
+                }
+                return _closeApp;
             }
         }
 
@@ -68,7 +117,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 if ( _currentViewModel != value )
                 {
                     _currentViewModel = value;
-                    OnPropertyChanged(nameof(CurrentViewModel));
+                   OnPropertyChanged(nameof(CurrentViewModel));
                 }
             }
         }

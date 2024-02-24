@@ -7,15 +7,30 @@
              >
 
     <Application.Resources>
-        <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
 
-        <DataTemplate DataType="{x:Type viewModel:MorseTranslatorViewModel}">
-            <view:MorseTranslatorView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            
+            
+            <ResourceDictionary.MergedDictionaries>
+                
+                
+                <ResourceDictionary Source="Themes\DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources\Animation\WindowAnimation.xaml"></ResourceDictionary>
+                                    
+                                    
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type viewModel:SettingViewModel}">
-            <view:SettingView/>
-        </DataTemplate>
-        
+
+            <DataTemplate DataType="{x:Type viewModel:MorseTranslatorViewModel}">
+                <view:MorseTranslatorView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingViewModel}">
+                <view:SettingView/>
+            </DataTemplate>
+                
+                
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

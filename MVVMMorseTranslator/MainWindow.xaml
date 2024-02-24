@@ -1,38 +1,133 @@
-﻿<Window x:Class="MVVMMorseTranslator.MainWindow"
+﻿<Window Name="MainHome" 
+        x:Class="MVVMMorseTranslator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMMorseTranslator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" 
+        Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+       >
+
+    <!--<WindowChrome.WindowChrome>
+        <WindowChrome  GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>-->
 
 
-    <Grid> 
+    <Window.Resources>
+
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Width" Value="{Binding Path=Width, RelativeSource={RelativeSource AncestorLevel=1 , AncestorType=StackPanel,Mode=FindAncestor}}"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Label Content="X" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" ></Label>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--//Title Btn Template//-->
+        <ControlTemplate x:Key="MinimizeBtn" TargetType="{x:Type Button}">
+            <Border Background="{TemplateBinding Background}">
+                <Path  Margin="6 2 0 0"
+                       Fill="{DynamicResource TitleBtnColor}"  
+                       Data="M20,14H4V10H20"></Path>
+            </Border>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="RestoreBtn" TargetType="{x:Type Button}">
+            <Border Background="{TemplateBinding Background}">
+                <Path x:Name="RestoreBtnData" Margin="6 2 0 0"
+                      Fill="{DynamicResource TitleBtnColor}" 
+                      Data="M4,4H20V20H4V4M6,8V18H18V8H6Z"></Path>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding ElementName=MainHome, Path=WindowState}" Value="Maximized">
+                    <Setter TargetName="RestoreBtnData" Property="Data" Value="M4,8H8V4H20V16H16V20H4V8M16,8V14H18V6H10V8H16M6,12V18H14V12H6Z"></Setter>
+                </DataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="CloseBtn" TargetType="{x:Type Button}">
+            <Border Background="{TemplateBinding Background}">
+                <Path Margin="6 2 0 0" 
+                      Fill="{DynamicResource TitleBtnColor}" 
+                      Data="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z"></Path>
+            </Border>
+        </ControlTemplate>
+        <!--// //-->
         
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        
+        <Style x:Key="TitleBtn" TargetType="Button">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="35"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
 
-        <StackPanel Grid.Column="0">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource TitleBtnBackgound}"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        
+        
+    </Window.Resources>
 
-            <RadioButton Content="MainWindow" FontSize="20"
-                        Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-                        CommandParameter="{Binding PageViewModels[0]}"
-                        IsChecked="True"
-            ></RadioButton>
+    <Border BorderThickness="7" BorderBrush="Transparent" Background="Transparent">
+        <Grid>
 
-            <RadioButton Content="Setting" FontSize="20"
-                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                      
-                        CommandParameter="{Binding PageViewModels[1]}"
-             ></RadioButton>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-        </StackPanel>
+            <StackPanel Grid.Column="0" Background="{DynamicResource SecundaryBackgoundColor}">
 
+                <RadioButton Content="MainWindow" FontSize="20"
+                    Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                    CommandParameter="{Binding PageViewModels[0]}"
+                    IsChecked="True"
+        ></RadioButton>
 
-        <ContentControl Grid.Column="1"  Content="{Binding CurrentViewModel , UpdateSourceTrigger=PropertyChanged}" />
-    </Grid>
+                <RadioButton Content="Setting" FontSize="20"
+                     Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                      
+                    CommandParameter="{Binding PageViewModels[1]}"
+         ></RadioButton>
+
+            </StackPanel>
+
+            <Grid Grid.Column="1" Background="{DynamicResource PrimaryBackgoundColor}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button Command="{Binding MinimizeApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource MinimizeBtn}"  ></Button>
+                    <Button Command="{Binding RestoreApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource RestoreBtn}" ></Button>
+                    <Button Command="{Binding CloseApp}" Style="{StaticResource TitleBtn}" Template="{StaticResource CloseBtn}">
+                    </Button>
+
+                </StackPanel>
+
+                <Border
+                Background="{DynamicResource SecundaryBackgoundColor}"
+                BorderThickness="10 40 10 10"
+                >
+                    <ContentControl  Content="{Binding CurrentViewModel , UpdateSourceTrigger=PropertyChanged}" />
+                </Border>
+
+            </Grid>
+        </Grid>
+    </Border>
+    
 
 
 

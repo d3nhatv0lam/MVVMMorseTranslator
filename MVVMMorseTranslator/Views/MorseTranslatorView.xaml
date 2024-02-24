@@ -5,25 +5,136 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MVVMMorseTranslator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="750">
+             d:DesignHeight="450" d:DesignWidth="750"
+             >
 
-    
-    <Grid Background="White">
+
+    <UserControl.Resources>
+
+        <!--//Audio Button Click//-->
+        <ControlTemplate x:Key="AudioDisplay" TargetType="Label">
+            <Grid >
+                <Label  Content="{TemplateBinding Content}"
+                        Width="{TemplateBinding Width}"
+                        Margin="{TemplateBinding Margin}"
+                        FontSize="{TemplateBinding FontSize}"
+                        Background="{TemplateBinding Background}"
+                        Foreground="{TemplateBinding Foreground}"
+                                
+                ></Label>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Button Content="Delete File" Width="30" Height="30" ></Button>
+                    <Label Margin="0 0 5 0" />
+                </StackPanel>
+            </Grid>
+        </ControlTemplate>
+
+        <!--//Header of Trans//-->
+        <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="Width" Value="500"></Setter>
+            <Setter Property="FontSize" Value="50" ></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryLabelColor}"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="Content" Value="MorseCode">
+                    <Setter Property="Template" Value="{StaticResource AudioDisplay}"></Setter>
+                </Trigger>
+            </Style.Triggers>
+           
+        </Style>
+
+
+        <!--//TextBox style//-->
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="120"></Setter>
+            <Setter Property="FontSize" Value="40"></Setter>
+            <Setter Property="AcceptsReturn" Value="true"></Setter>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
+            <Setter Property="Padding" Value="0 0 0 5"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="BorderBrush" Value="Gray"></Setter>
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackgoundColor}"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource TitleBtnColor}"></Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="TransTextBoxBorder" CornerRadius="10" 
+                                SnapsToDevicePixels="True"
+                                BorderThickness="3"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+
+                            <Grid>
+                                <TextBox x:Name="TransTextBox"
+                                        Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent} , UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="{TemplateBinding FontSize}"
+                                         AcceptsReturn="{TemplateBinding AcceptsReturn}"
+                                         VerticalScrollBarVisibility ="{TemplateBinding VerticalScrollBarVisibility}"
+                                         Padding="{TemplateBinding Padding}"
+                                         TextWrapping="{TemplateBinding TextWrapping}"
+                                         BorderThickness="{TemplateBinding BorderThickness}"
+                                         Background="{TemplateBinding Background}"
+                                         Foreground="{TemplateBinding Foreground}"
+                                      
+                                         
+                                ></TextBox>
+                            </Grid>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=TransTextBox , Path=IsMouseOver}" Value="True">
+                                <Setter Property="BorderBrush" Value="Blue"></Setter>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                        
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+
+
+    <Grid Background="{DynamicResource SecundaryBackgoundColor}">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50" MinHeight="0"></RowDefinition>
         </Grid.RowDefinitions>
-        <WrapPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Margin="15 30 0 0 " Width="500">
-                <Label Content="Alphabet" FontSize="50"></Label>
-                <TextBox Text="{Binding Alphabet, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="50"></TextBox>
 
+        <WrapPanel Orientation="Horizontal">
+            <WrapPanel.Resources>
+                
+                
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Margin" Value="10 0 0 0"></Setter>
+                    <Setter Property="Width" Value="500"></Setter>
+                </Style>
+                
+                
+            </WrapPanel.Resources>
+
+            <StackPanel Orientation="Vertical">
+                
+                <Label Content="Alphabet" 
+                       Style="{StaticResource LabelStyle}"></Label>
+                
+                <TextBox 
+                    Text="{Binding DataContext.PageViewModels[0].Alphabet,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    Style="{StaticResource TextBoxStyle}"
+                    ></TextBox>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="15 30 0 0" Width="500">
-                <Label Content="MorseCode" FontSize="50"></Label>
-                <Button Content="Delete File" Command="{Binding DeleteAudio}" ></Button>
-                <TextBox Text="{Binding MorseCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontSize="50"></TextBox>
+            <StackPanel Orientation="Vertical">
+                <Label Content="MorseCode" Style="{StaticResource LabelStyle}"></Label>
+         
+                <TextBox 
+                    Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    Style="{StaticResource TextBoxStyle}"
+                    ></TextBox>
             </StackPanel>
         </WrapPanel>
         
