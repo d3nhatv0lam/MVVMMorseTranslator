@@ -5,6 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMMorseTranslator"
+
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="550" Width="800"
@@ -14,10 +17,19 @@
         AllowsTransparency="True"
        >
 
-    <!--<WindowChrome.WindowChrome>
-        <WindowChrome  GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
-    </WindowChrome.WindowChrome>-->
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0" UseAeroCaptionButtons="False" ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>
 
+    <!--// Window animation //-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WindowLoad}" CommandParameter="{Binding ElementName=MainHome}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+
+    
 
     <Window.Resources>
 
@@ -29,7 +41,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
                         <Grid>
-                            <Label Content="X" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" ></Label>
+                            <Label  Content="X" Height="50" Width="50" VerticalAlignment="Center" HorizontalAlignment="Left" ></Label>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -82,52 +94,50 @@
         </Style>
         
         
-        
     </Window.Resources>
 
-    <Border BorderThickness="7" BorderBrush="Transparent" Background="Transparent">
-        <Grid>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid>
 
-            <StackPanel Grid.Column="0" Background="{DynamicResource SecundaryBackgoundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-                <RadioButton Content="MainWindow" FontSize="20"
+        <StackPanel Grid.Column="0" Background="{DynamicResource SecundaryBackgoundColor}">
+
+            <RadioButton Content="MainWindow" FontSize="20"
                     Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
                     CommandParameter="{Binding PageViewModels[0]}"
                     IsChecked="True"
         ></RadioButton>
 
-                <RadioButton Content="Setting" FontSize="20"
+            <RadioButton Content="Setting" FontSize="20"
                      Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                      
                     CommandParameter="{Binding PageViewModels[1]}"
          ></RadioButton>
 
+        </StackPanel>
+
+        <Grid Grid.Column="1" Background="{DynamicResource PrimaryBackgoundColor}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Command="{Binding MinimizeApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource MinimizeBtn}"  ></Button>
+                <Button Command="{Binding RestoreApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource RestoreBtn}" ></Button>
+                <Button Command="{Binding CloseApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource CloseBtn}">
+                </Button>
+
             </StackPanel>
 
-            <Grid Grid.Column="1" Background="{DynamicResource PrimaryBackgoundColor}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Button Command="{Binding MinimizeApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource MinimizeBtn}"  ></Button>
-                    <Button Command="{Binding RestoreApp}"  Style="{StaticResource TitleBtn}" Template="{StaticResource RestoreBtn}" ></Button>
-                    <Button Command="{Binding CloseApp}" Style="{StaticResource TitleBtn}" Template="{StaticResource CloseBtn}">
-                    </Button>
-
-                </StackPanel>
-
-                <Border
+            <Border
                 Background="{DynamicResource SecundaryBackgoundColor}"
                 BorderThickness="10 40 10 10"
                 >
-                    <ContentControl  Content="{Binding CurrentViewModel , UpdateSourceTrigger=PropertyChanged}" />
-                </Border>
+                <ContentControl  Content="{Binding CurrentViewModel , UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
 
-            </Grid>
         </Grid>
-    </Border>
-    
+    </Grid>
+
 
 
 

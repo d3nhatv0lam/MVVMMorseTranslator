@@ -26,6 +26,5 @@ namespace MVVMMorseTranslator
             InitializeComponent();
         }
 
-
     }
 }

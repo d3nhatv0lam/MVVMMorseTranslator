@@ -51,6 +51,10 @@ namespace MVVMMorseTranslator.Models
             MorseAudioDataInit();
             MorseAudioBeepInit();
         }
+        ~MorseAudioModel()
+        {
+            DeleteMusicFromDisk();
+        }
     }
 
     // Beep Audio 

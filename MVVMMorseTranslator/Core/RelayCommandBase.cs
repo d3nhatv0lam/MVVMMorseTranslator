@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace MVVMMorseTranslator.Core
 {
-    class RelayCommand<T> : ICommand
+     class RelayCommandBase<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
 
-        public RelayCommand(Predicate<T> canExecute, Action<T> execute)
+        public RelayCommandBase(Predicate<T> canExecute, Action<T> execute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");

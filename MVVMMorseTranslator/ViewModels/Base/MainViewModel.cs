@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using MVVMMorseTranslator.Core;
+using System.Windows.Interop;
 
 namespace MVVMMorseTranslator.ViewModels.Base
 {
@@ -18,9 +21,11 @@ namespace MVVMMorseTranslator.ViewModels.Base
         private ICommand _minimizeApp;
         private ICommand _restoreApp;
         private ICommand _closeApp;
+        private ICommand _windowLoad;
 
         private List<ViewModelBase> _pageViewModels;
         private ViewModelBase _currentViewModel;
+        private WindowAnimations windowAnimation;
 
         public MainViewModel()
         {
@@ -53,7 +58,8 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 {
                     _minimizeApp = new RelayCommand(() =>
                     {
-                        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                        //Application.Current.MainWindow.WindowState = WindowState.Minimized;
+                        SystemCommands.MinimizeWindow(Application.Current.MainWindow);
                     });
                 }
                 return _minimizeApp;
@@ -88,11 +94,26 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 {
                     _closeApp = new RelayCommand(() =>
                     {
-                        ((MorseTranslatorViewModel)PageViewModels[0]).DeleteAudio.Execute(null);
                         Application.Current.Shutdown();
                     });
                 }
                 return _closeApp;
+            }
+        }
+
+        public ICommand WindowLoad
+        {
+            get
+            {
+                if (_windowLoad == null)
+                {
+                    _windowLoad = new RelayCommand<Window>((window) =>
+                    {
+                        windowAnimation = new WindowAnimations(window); 
+
+                    });
+                }
+                return _windowLoad;
             }
         }
 
