@@ -22,6 +22,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
         private ICommand _restoreApp;
         private ICommand _closeApp;
         private ICommand _windowLoad;
+        private ICommand _windowStateChanged;
 
         private List<ViewModelBase> _pageViewModels;
         private ViewModelBase _currentViewModel;
@@ -114,6 +115,22 @@ namespace MVVMMorseTranslator.ViewModels.Base
                     });
                 }
                 return _windowLoad;
+            }
+        }
+
+        public ICommand WindowStateChanged
+        {
+            get
+            {
+                if (_windowStateChanged == null)
+                {
+                    _windowStateChanged = new RelayCommand(() =>
+                    {
+                        if (Application.Current.MainWindow.WindowState == WindowState.Minimized)
+                            Thread.Sleep(100);
+                    });
+                }
+                return _windowStateChanged;
             }
         }
 

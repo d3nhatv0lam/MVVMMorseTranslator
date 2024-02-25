@@ -23,7 +23,7 @@ namespace MVVMMorseTranslator.Core
         public WindowAnimations(Window window = null)
         {
             myHWND = new WindowInteropHelper(window).Handle;
-            IntPtr myStyle = new IntPtr((long)( WS.WS_CAPTION  | WS.WS_CLIPCHILDREN | WS.WS_MINIMIZEBOX | WS.WS_MAXIMIZEBOX | WS.WS_SYSMENU | WS.WS_SIZEBOX));
+            IntPtr myStyle = new IntPtr( WS.WS_CAPTION  | WS.WS_CLIPCHILDREN | WS.WS_MINIMIZEBOX | WS.WS_MAXIMIZEBOX | WS.WS_SYSMENU | WS.WS_SIZEBOX);
             SetWindowLongPtr(new HandleRef(null, myHWND), GWL_STYLE, myStyle);
         }
 

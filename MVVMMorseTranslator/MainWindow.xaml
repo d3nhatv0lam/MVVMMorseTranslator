@@ -14,7 +14,6 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
-        AllowsTransparency="True"
        >
 
     <WindowChrome.WindowChrome>
@@ -26,7 +25,13 @@
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding WindowLoad}" CommandParameter="{Binding ElementName=MainHome}"></i:InvokeCommandAction>
         </i:EventTrigger>
+
+        <i:EventTrigger EventName="StateChanged">
+            <i:InvokeCommandAction Command="{Binding WindowStateChanged}"></i:InvokeCommandAction>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
+    
+    
 
 
     
