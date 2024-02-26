@@ -1,10 +1,13 @@
-﻿using System;
+﻿using NAudio.Wave.SampleProviders;
+using NAudio.Wave;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 using Translator.Processors;
 
 namespace MVVMMorseTranslator.Models
@@ -27,6 +30,7 @@ namespace MVVMMorseTranslator.Models
                 {
                     _WPM = value;
                     MorseAudioDataInit();
+                    MorseAudioBeepInit();
                 }
                 
             }
@@ -79,15 +83,15 @@ namespace MVVMMorseTranslator.Models
             CreateBeep(RushWaitPath, 0, RushWait);
         }
         // Path data to create Audio file
-        private String DotPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Dot.wav");
-        private String DashPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Dash.wav");
-        private String WaitPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Wait.wav");
-        private String RushWaitPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "RushWait.wav");
-        private String TransPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Trans.wav");
+        private readonly String DotPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Dot.wav");
+        private readonly String DashPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Dash.wav");
+        private readonly String WaitPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Wait.wav");
+        private readonly String RushWaitPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "RushWait.wav");
+        private readonly String TransPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Trans.wav");
 
 
         // save audio to %Temp%
-        public void SaveMusicToDisk(MemoryStream mStrm, String Path)
+        private void SaveMusicToDisk(MemoryStream mStrm, String Path)
         {
             using (FileStream fileStream = File.Create(Path))
             {
@@ -95,7 +99,7 @@ namespace MVVMMorseTranslator.Models
             }
         }
         //Clear audio created in %temp% when exit app
-        public void DeleteMusicFromDisk()
+        private void DeleteMusicFromDisk()
         {
             foreach (var file in (new List<String>() { TransPath, DotPath, DashPath, WaitPath, RushWaitPath }))
             {
@@ -107,7 +111,7 @@ namespace MVVMMorseTranslator.Models
         }
 
         // Create Base Audio
-        public void CreateBeep(String Name, UInt16 frequency, int msDuration, UInt16 volume = 65535 /*16383*/)
+        private void CreateBeep(String Name, UInt16 frequency, int msDuration, UInt16 volume = 65535 /*16383*/)
         {
             var mStrm = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(mStrm);
@@ -155,5 +159,59 @@ namespace MVVMMorseTranslator.Models
             mStrm.Close();
             writer.Close();
         }
+    }
+
+    //Audio playing controller
+    public partial class MorseAudioModel
+    {
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+
+        private void CreateTransAudio(String MorseCode)
+        {
+            if (String.IsNullOrEmpty(MorseCode)) return;
+
+
+            List<AudioFileReader> AudioPart = new List<AudioFileReader>();
+            foreach (char data in MorseCode)
+            {
+                String path = "";
+                // Add another WAV file to merge
+                switch (data)
+                {
+                    case '.':
+                        path = DotPath;
+                        break;
+                    case '-':
+                        path = DashPath;
+                        break;
+                    case '/':
+                        path = WaitPath;
+                        break;
+                    default:
+                        path = RushWaitPath;
+                        break;
+                }
+                // AudioPart.Add(tempAudio);
+                AudioPart.Add(new AudioFileReader(path));
+                if (data != '/') AudioPart.Add(new AudioFileReader(RushWaitPath));
+                else if (data is ' ') AudioPart.Add(new AudioFileReader(RushWaitPath));
+            }
+
+            var Trans = new ConcatenatingSampleProvider(AudioPart);
+            WaveFileWriter.CreateWaveFile16(TransPath, Trans);
+            // release all file open
+            foreach (var part in AudioPart)
+            {
+                part.Close();
+            }
+
+        }
+
+        public bool isPlayingAudio = false;
+        private void PlayTransAudio()
+        {
+
+        }
+
     }
 }

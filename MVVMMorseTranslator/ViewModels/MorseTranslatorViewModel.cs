@@ -11,14 +11,31 @@ using MVVMMorseTranslator.Models;
 using System.Threading;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using static System.Net.WebRequestMethods;
+using System.Security.Policy;
+using System.Data.Common;
 
 namespace MVVMMorseTranslator.ViewModels
 {
     public class MorseTranslatorViewModel : ViewModelBase
     {
-        private ICommand _deleteAudio;
-        private readonly MorseTranslatorModel _morse = new MorseTranslatorModel();
-        private readonly MorseAudioModel _morseAudio = new MorseAudioModel();
+        // Model Connection
+        private MorseTranslatorModel _morse = new MorseTranslatorModel();
+        private MorseAudioModel _morseAudio = new MorseAudioModel();
+
+        private readonly Dictionary<String, String> _connectionLink = new Dictionary<String, String>()
+        {
+            {"Youtube" , "https://www.youtube.com/@ucduong9984"},
+            {"Facebook" , "https://www.facebook.com/profile.php?id=100088452777261" },
+            {"Github" , "https://github.com/d3nhatv0lam" }
+        };
+
+        public Dictionary<String, String> ConnectionLink
+        {
+            get => _connectionLink;
+        }
+
+        private ICommand _connection;
 
         public String Alphabet
         {
@@ -59,21 +76,18 @@ namespace MVVMMorseTranslator.ViewModels
             }
         }
 
-        public ICommand DeleteAudio
+        public ICommand Connection
         {
             get
             {
-                if (_deleteAudio == null)
+                if (_connection == null)
                 {
-                    _deleteAudio = new RelayCommand(() =>
-                    {
-                        _morseAudio.DeleteMusicFromDisk();
-                    });
+                    _connection = new RelayCommand<String>(
+                        (Link) =>  System.Diagnostics.Process.Start(Link));
                 }
-                return _deleteAudio;
+                return _connection;
             }
         }
-
 
         public MorseTranslatorViewModel()
         {
