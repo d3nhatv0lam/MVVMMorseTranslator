@@ -17,24 +17,27 @@ namespace MVVMMorseTranslator.ViewModels.Base
 {
     public class MainViewModel : ViewModelBase
     {
+        private Navigation _navigation;
+        private WindowAnimations windowAnimation;
+
+
         private ICommand _changePageCommand;
         private ICommand _minimizeApp;
         private ICommand _restoreApp;
         private ICommand _closeApp;
         private ICommand _windowLoad;
         private ICommand _windowStateChanged;
+        private ICommand _dragMoveWindow;
 
-        private List<ViewModelBase> _pageViewModels;
-        private ViewModelBase _currentViewModel;
-        private WindowAnimations windowAnimation;
 
         public MainViewModel()
         {
+            _navigation = new Navigation();
             // Add available pages
             PageViewModels.Add(new MorseTranslatorViewModel());
-            PageViewModels.Add(new SettingViewModel() );
+            PageViewModels.Add(new SettingViewModel());
 
-            CurrentViewModel = PageViewModels.First();
+            _navigation.CurrentViewModel = PageViewModels.First();
         }
 
         public ICommand ChangePageCommand
@@ -44,7 +47,11 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 if (_changePageCommand == null)
                 {
                     _changePageCommand = new RelayCommand<ViewModelBase>(
-                        p => changeViewModel((ViewModelBase)p),
+                        p => {
+
+                            _navigation.changeViewModel((ViewModelBase)p);
+                            OnPropertyChanged(nameof(CurrentViewModel));
+                        },
                          p => true);
                 }
                 return _changePageCommand;
@@ -110,7 +117,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 {
                     _windowLoad = new RelayCommand<Window>((window) =>
                     {
-                        windowAnimation = new WindowAnimations(window); 
+                        windowAnimation = new WindowAnimations(window);
 
                     });
                 }
@@ -134,13 +141,26 @@ namespace MVVMMorseTranslator.ViewModels.Base
             }
         }
 
+        public ICommand DragMoveWindow
+        {
+            get
+            {
+                if (_dragMoveWindow == null)
+                {
+                    _dragMoveWindow = new RelayCommand(() =>
+                    {
+                        Application.Current.MainWindow.DragMove();
+                    });
+                }
+                return _dragMoveWindow;
+            }
+        }
+
         public List<ViewModelBase> PageViewModels
         {
             get
             {
-                if (_pageViewModels == null)
-                    _pageViewModels = new List<ViewModelBase>();
-                return _pageViewModels;
+                return _navigation.PageViewModels;
             }
         }
 
@@ -148,25 +168,8 @@ namespace MVVMMorseTranslator.ViewModels.Base
         {
             get
             {
-                return _currentViewModel;
+                return _navigation.CurrentViewModel;
             }
-            set
-            {
-                if ( _currentViewModel != value )
-                {
-                    _currentViewModel = value;
-                   OnPropertyChanged(nameof(CurrentViewModel));
-                }
-            }
-        }
-
-
-        private void changeViewModel(ViewModelBase viewModel)
-        {
-            if (!PageViewModels.Contains(viewModel))
-                PageViewModels.Add(viewModel);
-            CurrentViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);   
-
         }
 
     }

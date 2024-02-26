@@ -138,6 +138,7 @@
     <Compile Include="Models\MorseAudioModel.cs" />
     <Compile Include="Models\MorseTranslatorModel.cs" />
     <Compile Include="ViewModels\Base\MainViewModel.cs" />
+    <Compile Include="ViewModels\Base\Navigation.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MorseTranslatorViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
