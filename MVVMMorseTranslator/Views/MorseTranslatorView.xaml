@@ -35,11 +35,11 @@
                             BorderBrush="Transparent"
                             Width="30"
                             Height="30"
-                            Margin="0 0 10 5">
+                            Margin="0 0 10 5"
+                            Command="{Binding PlayMorseAudio}">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <fa:ImageAwesome x:Name="PlayBtn" 
-                                                 Icon="Play"
+                                <fa:ImageAwesome x:Name="PlayBtn"
                                                  Height="{TemplateBinding Height}"
                                                  Width="{TemplateBinding Width}" 
                                                  />
@@ -51,6 +51,28 @@
                                                 Property="Foreground"
                                                 Value="Gray"></Setter>
                                     </Trigger>
+
+                                    <DataTrigger Binding="{Binding Path=IsPlayingMorseAudio}"
+                                                 Value="False">
+
+                                        <Setter TargetName="PlayBtn"
+                                                Property="Icon"
+                                                Value="VolumeUp" />
+                                        
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Path=IsPlayingMorseAudio}"
+                                                 Value="True">
+
+                                        <Setter TargetName="PlayBtn"
+                                                Property="Icon"
+                                                Value="Play" />
+
+                                    </DataTrigger>
+
+
+                                    
+                                    
                                 </ControlTemplate.Triggers>
 
                             </ControlTemplate>
@@ -271,6 +293,19 @@
 
                 <TextBox Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                          Style="{StaticResource TextBoxStyle}"></TextBox>
+
+                <!--<RichTextBox x:Name="MorseAudioTextBox"
+                             Height="120"
+                             FontSize="40"
+                            >
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin"
+                                    Value="0" />
+                        </Style>
+                    </RichTextBox.Resources>
+                </RichTextBox>-->
+                
             </StackPanel>
         </WrapPanel>
 

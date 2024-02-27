@@ -25,5 +25,45 @@ namespace MVVMMorseTranslator.Views
         {
             InitializeComponent();
         }
+
+
+        //private void click(object sender, RoutedEventArgs e)
+        //{
+        //    MorseAudioTextBox.Document.Blocks.Clear();
+        //    String inputText = "asdasd";
+
+        //    TextRange textRange = new TextRange(MorseAudioTextBox.Document.ContentEnd, MorseAudioTextBox.Document.ContentEnd);
+
+        //    // Đặt nội dung của TextRange bằng chuỗi đầu vào
+        //    //textRange.Text += inputText;
+        //    Paragraph paragraph = new Paragraph();
+
+        //    foreach (char character in inputText)
+        //    {
+        //        Run run = new Run(character.ToString());
+
+        //        paragraph.Inlines.Add(run);
+
+        //        // Đặt thuộc tính cho từng phần tử Run (ví dụ: màu sắc)
+        //        // run.Foreground = Brushes.Red; // Đặt màu sắc theo ý muốn
+
+        //        // Thêm phần tử Run vào RichTextBox
+                
+
+        //        //MorseTextBox.SelectAll();
+        //        //string Str = MorseTextBox.Selection.Text;
+        //        //Debug.Write(Str);
+        //    }
+        //    MorseAudioTextBox.Document.Blocks.Add(paragraph);
+
+        //    foreach (var chr in MorseAudioTextBox.Document.Blocks)
+        //    {
+
+        //    }
+
+        //    MorseAudioTextBox.Selection.Select(MorseAudioTextBox.Document.ContentStart.GetPositionAtOffset(1), MorseAudioTextBox.Document.ContentStart.GetPositionAtOffset(4).GetPositionAtOffset(1));
+        //    Debug.Write(MorseAudioTextBox.Selection.Text);
+        //    }
+
     }
 }

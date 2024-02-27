@@ -14,6 +14,7 @@ using CommunityToolkit.Mvvm.Input;
 using static System.Net.WebRequestMethods;
 using System.Security.Policy;
 using System.Data.Common;
+using System.Timers;
 
 namespace MVVMMorseTranslator.ViewModels
 {
@@ -30,12 +31,17 @@ namespace MVVMMorseTranslator.ViewModels
             {"Github" , "https://github.com/d3nhatv0lam" }
         };
 
+        private ICommand _connection;
+        private ICommand _playMorseAudio;
+
+
+
         public Dictionary<String, String> ConnectionLink
         {
             get => _connectionLink;
         }
 
-        private ICommand _connection;
+
 
         public String Alphabet
         {
@@ -44,6 +50,7 @@ namespace MVVMMorseTranslator.ViewModels
             set
             {
                 _morse.Alphabet = value;
+                _morseAudio._isCreateTransAudio = false;
                 OnPropertyChanged(nameof(MorseCode));
             }
         }
@@ -54,7 +61,20 @@ namespace MVVMMorseTranslator.ViewModels
             set
             {
                 _morse.MorseCode = value;
+
                 OnPropertyChanged(nameof(Alphabet));
+            }
+        }
+
+
+        public bool IsPlayingMorseAudio
+        {
+            get => _morseAudio._isPlayingMorseAudio;
+
+            set
+            {
+                _morseAudio._isPlayingMorseAudio = value;
+                OnPropertyChanged(nameof(IsPlayingMorseAudio));
             }
         }
 
@@ -83,9 +103,30 @@ namespace MVVMMorseTranslator.ViewModels
                 if (_connection == null)
                 {
                     _connection = new RelayCommand<String>(
-                        (Link) =>  System.Diagnostics.Process.Start(Link));
+                        (Link) => System.Diagnostics.Process.Start(Link));
                 }
                 return _connection;
+            }
+        }
+
+        public ICommand PlayMorseAudio
+        {
+            get
+            {
+                if (_playMorseAudio == null)
+                {
+                    _playMorseAudio = new RelayCommand(() =>
+                    {
+                        if (!_morseAudio._isCreateTransAudio)
+                        {
+                            _morseAudio.CreateTransAudio(MorseCode);
+                        }
+
+                        _morseAudio.PlayTransAudio(value => IsPlayingMorseAudio = value);
+
+                    });
+                }
+                return _playMorseAudio;
             }
         }
 
@@ -93,7 +134,6 @@ namespace MVVMMorseTranslator.ViewModels
         {
            
         }
-
 
     }
 

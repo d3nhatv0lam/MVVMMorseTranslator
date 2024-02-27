@@ -8,7 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using Translator.Processors;
+using System.Windows.Markup;
+using System.Windows.Shapes;
+using System.Windows.Media.TextFormatting;
+using System.Windows;
+using System.Security.RightsManagement;
+using System.Diagnostics;
+using System.Windows.Controls.Primitives;
 
 namespace MVVMMorseTranslator.Models
 {
@@ -20,7 +26,13 @@ namespace MVVMMorseTranslator.Models
         private int Dot;
         private int Dash;
         private int RushWait;
+        private int CharacterWait;
         private int Wait;
+
+        public bool _isCreateTransAudio = false;
+        private MediaPlayer _morseMediaPlayer = new MediaPlayer();
+        public bool _isPlayingMorseAudio = false;
+
 
 
         public int WPM { 
@@ -57,6 +69,7 @@ namespace MVVMMorseTranslator.Models
         }
         ~MorseAudioModel()
         {
+            StopAudio();
             DeleteMusicFromDisk();
         }
     }
@@ -72,11 +85,13 @@ namespace MVVMMorseTranslator.Models
             Dot = 1000 * 60 / (50 * WPM);
             Dash = Dot * 3;
             RushWait = Dot;
-            Wait = Dot * 2;
+            CharacterWait = 3 * Dot;
+            Wait = Dot * 7;
         }
 
         private void MorseAudioBeepInit()
         {
+            _isCreateTransAudio = false;
             CreateBeep(DotPath, (UInt16)Frequency, Dot);
             CreateBeep(DashPath, (UInt16)Frequency, Dash);
             CreateBeep(WaitPath, 0, Wait);
@@ -164,19 +179,20 @@ namespace MVVMMorseTranslator.Models
     //Audio playing controller
     public partial class MorseAudioModel
     {
-        private MediaPlayer mediaPlayer = new MediaPlayer();
 
-        private void CreateTransAudio(String MorseCode)
+
+
+        public void CreateTransAudio(String MorseCode)
         {
-            if (String.IsNullOrEmpty(MorseCode)) return;
-
+            if (_isCreateTransAudio) return;
+            _isCreateTransAudio = true;
 
             List<AudioFileReader> AudioPart = new List<AudioFileReader>();
-            foreach (char data in MorseCode)
+            for (var i = 0; i < MorseCode.Length; i++)
             {
                 String path = "";
                 // Add another WAV file to merge
-                switch (data)
+                switch (MorseCode[i])
                 {
                     case '.':
                         path = DotPath;
@@ -187,14 +203,37 @@ namespace MVVMMorseTranslator.Models
                     case '/':
                         path = WaitPath;
                         break;
+                    case ' ':
+                        path = ((i+1 < MorseCode.Length) && (MorseCode[i+1] == '/' || MorseCode[i-1] == '/'))?null:RushWaitPath;
+                        break;
                     default:
-                        path = RushWaitPath;
                         break;
                 }
-                // AudioPart.Add(tempAudio);
-                AudioPart.Add(new AudioFileReader(path));
-                if (data != '/') AudioPart.Add(new AudioFileReader(RushWaitPath));
-                else if (data is ' ') AudioPart.Add(new AudioFileReader(RushWaitPath));
+
+                // check this String " / "
+                if (!String.IsNullOrEmpty(path))
+                {
+                    AudioPart.Add(new AudioFileReader(path));
+                    // space = CharacterWait = 3 Dot
+                    if (MorseCode[i] is ' ')
+                    {
+                        AudioPart.Add(new AudioFileReader(RushWaitPath));
+                        AudioPart.Add(new AudioFileReader(RushWaitPath));
+                    }
+
+                    if (MorseCode[i] is '.' || MorseCode[i] is '-')
+                    {
+                        if ((i + 1 < MorseCode.Length) && (MorseCode[i + 1] != ' '))
+                            AudioPart.Add(new AudioFileReader(RushWaitPath));
+                    }
+                }
+                    
+
+
+            }
+            if (AudioPart.Count == 0)
+            {
+                AudioPart.Add(new AudioFileReader(RushWaitPath));
             }
 
             var Trans = new ConcatenatingSampleProvider(AudioPart);
@@ -207,11 +246,49 @@ namespace MVVMMorseTranslator.Models
 
         }
 
-        public bool isPlayingAudio = false;
-        private void PlayTransAudio()
-        {
 
+
+        public void PlayTransAudio(Action<bool> Setvalue) // Setvalue = value => IsPlayingMorseAudio = value
+        {
+            if (!_isPlayingMorseAudio)
+            {
+                Setvalue(true);
+                _morseMediaPlayer.Open(new Uri(TransPath));
+                
+                _morseMediaPlayer.MediaEnded += new EventHandler((sender, e) =>
+                {
+                    Setvalue(false);
+                    _morseMediaPlayer.Close();
+                });
+                _morseMediaPlayer.Volume = 1;
+                _morseMediaPlayer.Play();
+            }
+            else StopAudio(Setvalue);
         }
 
+
+
+        private void StopAudio(Action<bool> Setvalue)
+        {
+            if (_isPlayingMorseAudio) {
+                Setvalue(false);
+                _morseMediaPlayer.Stop();
+                _morseMediaPlayer.Close();
+            }
+        }
+
+        private void StopAudio()
+        {
+            if (_isPlayingMorseAudio)
+            {
+                _isPlayingMorseAudio = false;
+                _morseMediaPlayer.Stop();
+                _morseMediaPlayer.Close();
+            }
+        }
+
+
     }
+
+
 }
