@@ -7,9 +7,22 @@
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        
+        <Style x:Key="LabelSytle"
+               TargetType="{x:Type Label}"
+               BasedOn="{StaticResource GBLabelStyle}">
+
+            <Setter Property="FontSize"
+                    Value="30" />
+        </Style>
+        
+        
+    </UserControl.Resources>
     
     
-    <Grid Background="{StaticResource SecundaryBackgoundColor}" >
+    <Grid Background="{DynamicResource SecundaryBackgoundColor}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -42,17 +55,38 @@
             
             <Grid Grid.Row="0" Grid.Column="0">
                 <DockPanel>
-                    <Label DockPanel.Dock="Top" Content="WPM Setting" FontSize="30"></Label>
+                    <Label DockPanel.Dock="Top"
+                           Content="WPM Setting" Style="{DynamicResource LabelSytle}"></Label>
                     <TextBox  Text ="{Binding DataContext.PageViewModels[0].WPM , RelativeSource= {RelativeSource AncestorType=Window}}"  FontSize="30"></TextBox>
                 </DockPanel>
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
-                    <Label DockPanel.Dock="Top" Content="Frequency Setting" FontSize="30" ></Label>
+                    <Label DockPanel.Dock="Top" Content="Frequency Setting" Style="{DynamicResource LabelSytle}" ></Label>
                     <TextBox  Text ="{Binding DataContext.PageViewModels[0].Frequency , RelativeSource= {RelativeSource AncestorType=Window}}" FontSize="30"></TextBox>
                 </DockPanel>
             </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="0">
+
+                <ToggleButton x:Name="ThemeButton"
+                              Content="Theme"
+                              IsThreeState="False"
+                              Command="{Binding ChangeTheme}"
+                              CommandParameter="{Binding Path=IsChecked, ElementName=ThemeButton}">
+                    <ToggleButton.InputBindings>
+                        
+                        
+                        <MouseBinding Gesture="LeftClick"
+                                      />
+                        
+                        
+                    </ToggleButton.InputBindings>
+                </ToggleButton>
+             </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>

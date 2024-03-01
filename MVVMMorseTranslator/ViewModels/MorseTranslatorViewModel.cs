@@ -11,7 +11,6 @@ using MVVMMorseTranslator.Models;
 using System.Threading;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using static System.Net.WebRequestMethods;
 using System.Security.Policy;
 using System.Data.Common;
 using System.Timers;

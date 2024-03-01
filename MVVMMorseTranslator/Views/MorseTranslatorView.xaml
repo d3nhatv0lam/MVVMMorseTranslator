@@ -78,24 +78,16 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    
-                    
+
                 </StackPanel>
             </Grid>
         </ControlTemplate>
 
         <!--//Header of Trans//-->
         <Style x:Key="LabelStyle"
-               TargetType="{x:Type Label}">
-            <Setter Property="Width"
-                    Value="500"></Setter>
-            <Setter Property="FontSize"
-                    Value="50"></Setter>
-            <Setter Property="Background"
-                    Value="Transparent"></Setter>
-            <Setter Property="Foreground"
-                    Value="{DynamicResource PrimaryLabelColor}"></Setter>
-
+               TargetType="{x:Type Label}"
+               BasedOn="{StaticResource GBLabelStyle}">
+            
             <Style.Triggers>
                 <Trigger Property="Content"
                          Value="MorseCode">
@@ -109,63 +101,9 @@
 
         <!--//TextBox style//-->
         <Style x:Key="TextBoxStyle"
-               TargetType="{x:Type TextBox}">
-            <Setter Property="Height"
-                    Value="120"></Setter>
-            <Setter Property="FontSize"
-                    Value="40"></Setter>
-            <Setter Property="AcceptsReturn"
-                    Value="true"></Setter>
-            <Setter Property="VerticalScrollBarVisibility"
-                    Value="Auto"></Setter>
-            <Setter Property="Padding"
-                    Value="0 0 0 5"></Setter>
-            <Setter Property="TextWrapping"
-                    Value="Wrap"></Setter>
-            <Setter Property="BorderThickness"
-                    Value="0"></Setter>
-            <Setter Property="BorderBrush"
-                    Value="Gray"></Setter>
-            <Setter Property="Background"
-                    Value="{DynamicResource PrimaryBackgoundColor}"></Setter>
-            <Setter Property="Foreground"
-                    Value="{DynamicResource TitleBtnColor}"></Setter>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="TransTextBoxBorder"
-                                CornerRadius="10"
-                                SnapsToDevicePixels="True"
-                                BorderThickness="3"
-                                BorderBrush="{TemplateBinding BorderBrush}">
-
-                            <Grid>
-                                <TextBox x:Name="TransTextBox"
-                                         Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent} , UpdateSourceTrigger=PropertyChanged}"
-                                         FontSize="{TemplateBinding FontSize}"
-                                         AcceptsReturn="{TemplateBinding AcceptsReturn}"
-                                         VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
-                                         Padding="{TemplateBinding Padding}"
-                                         TextWrapping="{TemplateBinding TextWrapping}"
-                                         BorderThickness="{TemplateBinding BorderThickness}"
-                                         Background="{TemplateBinding Background}"
-                                         Foreground="{TemplateBinding Foreground}"></TextBox>
-                            </Grid>
-
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=TransTextBox , Path=IsMouseOver}"
-                                         Value="True">
-                                <Setter Property="BorderBrush"
-                                        Value="Blue"></Setter>
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+               TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource GBTextBoxStyle}">
+                
         </Style>
 
         <!--// Contact Icon Style //-->
@@ -281,18 +219,18 @@
             <StackPanel Orientation="Vertical">
 
                 <Label Content="Alphabet"
-                       Style="{StaticResource LabelStyle}"></Label>
+                       Style="{DynamicResource LabelStyle}"></Label>
 
                 <TextBox Text="{Binding DataContext.PageViewModels[0].Alphabet,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}"></TextBox>
+                         Style="{DynamicResource TextBoxStyle}"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Vertical">
                 <Label Content="MorseCode"
-                       Style="{StaticResource LabelStyle}"></Label>
+                       Style="{DynamicResource LabelStyle}"></Label>
 
                 <TextBox Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}"></TextBox>
+                         Style="{DynamicResource TextBoxStyle}"></TextBox>
 
                 <!--<RichTextBox x:Name="MorseAudioTextBox"
                              Height="120"

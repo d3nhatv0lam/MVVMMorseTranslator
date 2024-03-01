@@ -52,7 +52,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
                             _navigation.changeViewModel((ViewModelBase)p);
                             OnPropertyChanged(nameof(CurrentViewModel));
                         },
-                         p => true);
+                        p => true);
                 }
                 return _changePageCommand;
             }

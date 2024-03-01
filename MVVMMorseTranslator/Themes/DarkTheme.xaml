@@ -7,12 +7,17 @@
     <SolidColorBrush x:Key="SecundaryBackgoundColor" Color="#1d2335"></SolidColorBrush>
     
     
-    
     <!--//Text//-->
-    <SolidColorBrush x:Key="PrimaryLabelColor" Color="#ba9ffb"></SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryLabelColor"
+                     Color="#ba9ffb"></SolidColorBrush>
     
-    
-    
+    <SolidColorBrush x:Key="PrimaryTextBoxBGColor" Color="#1d2335" />
+
+    <SolidColorBrush x:Key="PrimaryTextBoxFGColor"
+                     Color="#6F6A6A" />
+
+
+
     <SolidColorBrush x:Key="TitleBtnColor" Color="#c4c4c4"></SolidColorBrush>
     <SolidColorBrush x:Key="TitleBtnBackgound" Color="#6F6A6A"></SolidColorBrush>
 
@@ -24,28 +29,5 @@
     <SolidColorBrush x:Key="TextFourthColor" Color="#4B5D78"></SolidColorBrush>
     
     
-    <!--<Style TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="#ba9ffb"></Setter>
-        <Setter Property="Foreground" Value="#ba9ffb"></Setter>
-    </Style>
-
-    <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="#282828"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-    </Style>
-
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="Background" Value="#1e1e1e"></Setter>
-        <Setter Property="Foreground" Value="#7a5af5"></Setter>
-        
-    </Style>
-
-    <Style TargetType="{x:Type Grid}">
-        <Setter Property="Background" Value="#1e1e1e"></Setter>
-    </Style>
-
-    <Style TargetType="RadioButton">
-        <Setter Property="Foreground" Value="White"></Setter>
-    </Style>-->
 
 </ResourceDictionary>

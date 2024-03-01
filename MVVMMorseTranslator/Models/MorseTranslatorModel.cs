@@ -11,8 +11,8 @@ namespace MVVMMorseTranslator.Models
 {
     public partial class MorseTranslatorModel
     {
-        private String _alphabet;
-        private String _morseCode;
+        private String _alphabet = String.Empty;
+        private String _morseCode = String.Empty;
 
         public String Alphabet
         {

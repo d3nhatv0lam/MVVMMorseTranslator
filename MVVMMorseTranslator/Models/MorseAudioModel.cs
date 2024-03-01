@@ -228,9 +228,8 @@ namespace MVVMMorseTranslator.Models
                     }
                 }
                     
-
-
             }
+
             if (AudioPart.Count == 0)
             {
                 AudioPart.Add(new AudioFileReader(RushWaitPath));

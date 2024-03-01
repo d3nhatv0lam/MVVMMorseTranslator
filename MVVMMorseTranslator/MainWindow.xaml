@@ -41,7 +41,7 @@
 
     <Window.Resources>
         <!--// Main Navigation Icon Style //-->
-        <Style TargetType="{x:Type RadioButton}">
+        <!--<Style TargetType="{x:Type RadioButton}">
             <Setter Property="Height"
                     Value="50"></Setter>
             <Setter Property="Width"
@@ -60,7 +60,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
         <!--//Title Btn Template//-->
         <ControlTemplate x:Key="MinimizeBtn"
@@ -130,22 +130,30 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!--// Main MVVM navigation //--> 
-        <StackPanel Grid.Column="0"
-                    Background="{DynamicResource SecundaryBackgoundColor}">
+        <!--// Main MVVM navigation //-->
 
-            <RadioButton Content="MainWindow"
-                         FontSize="20"
-                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                         CommandParameter="{Binding PageViewModels[0]}"
-                         IsChecked="True"></RadioButton>
+        <Grid Grid.Column="0"
+              Background="{DynamicResource SecundaryBackgoundColor}">
 
-            <RadioButton Content="Setting"
-                         FontSize="20"
-                         Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                         CommandParameter="{Binding PageViewModels[1]}"></RadioButton>
+            <StackPanel Margin="0 50 0 0">
+                
+                <RadioButton Content="MainWindow"
+                             FontSize="20"
+                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                             CommandParameter="{Binding PageViewModels[0]}"
+                             Style="{DynamicResource IconNavigaion}"
+                             IsChecked="True"></RadioButton>
 
-        </StackPanel>
+                <RadioButton Content="Setting"
+                             FontSize="20"
+                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                             Style="{DynamicResource IconNavigaion}"
+                             CommandParameter="{Binding PageViewModels[1]}"></RadioButton>
+
+            </StackPanel>
+
+        </Grid>
+        
 
         <!--// Main Screen //-->
         <Grid Grid.Column="1"

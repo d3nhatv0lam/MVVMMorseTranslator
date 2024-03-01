@@ -137,6 +137,7 @@
     <Compile Include="Core\WindowAnimations.cs" />
     <Compile Include="Models\MorseAudioModel.cs" />
     <Compile Include="Models\MorseTranslatorModel.cs" />
+    <Compile Include="Themes\ThemeController.cs" />
     <Compile Include="ViewModels\Base\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\Navigation.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
@@ -161,7 +162,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\Animation\WindowAnimation.xaml">
+    <Page Include="Resources\Styles\ElementStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

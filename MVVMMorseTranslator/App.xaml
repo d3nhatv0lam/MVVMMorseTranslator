@@ -12,15 +12,16 @@
             
             
             <ResourceDictionary.MergedDictionaries>
-                
-                
-                <ResourceDictionary Source="Themes\DarkTheme.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="Resources\Animation\WindowAnimation.xaml"></ResourceDictionary>
-                                    
-                                    
+
+
+                <ResourceDictionary Source="Themes\LightTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources\Styles\ElementStyle.xaml"></ResourceDictionary>
+
+
             </ResourceDictionary.MergedDictionaries>
 
 
+            <!--// MVVM View Setup //-->
             <DataTemplate DataType="{x:Type viewModel:MorseTranslatorViewModel}">
                 <view:MorseTranslatorView/>
             </DataTemplate>
