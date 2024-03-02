@@ -36,6 +36,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
             // Add available pages
             PageViewModels.Add(new MorseTranslatorViewModel());
             PageViewModels.Add(new SettingViewModel());
+            PageViewModels.Add(new AboutAppViewModel());
 
             _navigation.CurrentViewModel = PageViewModels.First();
         }

@@ -138,18 +138,26 @@
             <StackPanel Margin="0 50 0 0">
 
                 <RadioButton Content="Home"
-                             FontSize="20"
+                             Tag=" Main Home "
+                             Style="{DynamicResource IconNavigaion}"
                              Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                              CommandParameter="{Binding PageViewModels[0]}"
-                             Style="{DynamicResource IconNavigaion}"
+                             
                              IsChecked="True"></RadioButton>
 
                 <RadioButton Content="Gear"
-                             FontSize="20"
-                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                             Tag=" Setting "
                              Style="{DynamicResource IconNavigaion}"
+                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                              CommandParameter="{Binding PageViewModels[1]}"></RadioButton>
 
+                <RadioButton Content="Users"
+                             Tag=" About Application "
+                             Style="{DynamicResource IconNavigaion}"
+                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                             CommandParameter="{Binding PageViewModels[2]}"></RadioButton>
+
+                
             </StackPanel>
 
         </Grid>

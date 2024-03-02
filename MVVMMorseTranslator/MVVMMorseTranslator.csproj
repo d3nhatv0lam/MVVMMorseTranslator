@@ -135,14 +135,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\WindowAnimations.cs" />
+    <Compile Include="Models\AboutAppModel.cs" />
     <Compile Include="Models\MorseAudioModel.cs" />
     <Compile Include="Models\MorseTranslatorModel.cs" />
     <Compile Include="Themes\ThemeController.cs" />
+    <Compile Include="ViewModels\AboutAppViewModel.cs" />
     <Compile Include="ViewModels\Base\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\Navigation.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MorseTranslatorViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="Views\AboutAppView.xaml.cs">
+      <DependentUpon>AboutAppView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MorseTranslatorView.xaml.cs">
       <DependentUpon>MorseTranslatorView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\LightTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AboutAppView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

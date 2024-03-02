@@ -16,6 +16,8 @@
 
     </Style>
     
+    
+    
     <!--// TextBox Style //-->
 
     <Style x:Key="GBTextBoxStyle"
@@ -86,6 +88,9 @@
         <Setter Property="Width"
                 Value="{Binding Path=Width, RelativeSource={RelativeSource AncestorLevel=1 , AncestorType=StackPanel,Mode=FindAncestor}}"></Setter>
 
+        <Setter Property="FontSize"
+                Value="20" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
@@ -108,14 +113,60 @@
                                 HorizontalAlignment="Left"
                                 ></Border>
 
-                        <fa:FontAwesome Icon="{Binding Content , RelativeSource={RelativeSource TemplatedParent}}"
-                                        FontSize="25" 
+                        <fa:FontAwesome Icon="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"
+                                        FontSize="25"
                                         FontWeight="ExtraLight"
                                         Foreground="{DynamicResource IconColor}"
-                                        VerticalAlignment="Center" 
-                                        HorizontalAlignment="Center"/>
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center" />
 
-                        
+                        <!--// PopUp Style //-->
+                        <Popup x:Name="PopupView" 
+                               SnapsToDevicePixels="True"
+                               IsOpen="True"
+                               Placement="Right"
+                               VerticalOffset="10"
+                               AllowsTransparency="True"
+                               Opacity="0"
+                               Tag="{Binding Path=Opacity, RelativeSource={RelativeSource self}, Mode=TwoWay}"
+                               >
+
+                            <Border Opacity="{Binding ElementName=PopupView, Path=Opacity}"
+                                    Background="Blue"
+                                    CornerRadius="0 10 10 0"
+                                    Height="35"
+                                    SnapsToDevicePixels="True"
+                                    Width="{Binding ElementName=name, Path=Width}">
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="12"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Grid Grid.Column="0">
+                                        <Path Fill="Red"
+                                              Stretch="Uniform"
+                                              Data="M7.2,11.2C8.97,11.2 10.4,12.63 10.4,14.4C10.4,16.17 8.97,17.6 7.2,17.6C5.43,17.6 4,16.17 4,14.4C4,12.63 5.43,11.2 7.2,11.2M14.8,16A2,2 0 0,1 16.8,18A2,2 0 0,1 14.8,20A2,2 0 0,1 12.8,18A2,2 0 0,1 14.8,16M15.2,4A4.8,4.8 0 0,1 20,8.8C20,11.45 17.85,13.6 15.2,13.6A4.8,4.8 0 0,1 10.4,8.8C10.4,6.15 12.55,4 15.2,4Z" />
+
+                                    </Grid>
+
+
+
+                                    <TextBlock x:Name="name"
+                                               Grid.Column="1"
+                                               FontWeight="Bold"
+                                               Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"></TextBlock>
+                                        
+
+                                </Grid>
+                            </Border>
+
+                        </Popup>
+
+
                     </Grid>
 
 
@@ -123,11 +174,13 @@
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition  Property="IsMouseOver"
+                                <Condition Property="IsMouseOver"
                                            Value="False" />
                                 <Condition Property="IsChecked"
                                            Value="False" />
                             </MultiTrigger.Conditions>
+
+                            <!--// Don't Selected & MouseOver //-->
 
                             <MultiTrigger.EnterActions>
                                 <BeginStoryboard>
@@ -150,8 +203,6 @@
 
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
-                                
-                              <!--// Don't Selected & MouseOver //-->
 
                             <MultiTrigger.ExitActions>
                                 <BeginStoryboard>
@@ -172,13 +223,45 @@
 
                                     </Storyboard>
                                 </BeginStoryboard>
-
                             </MultiTrigger.ExitActions>
-
+                            
                         </MultiTrigger>
 
+                        <!--// PopUp Animation //-->
 
-                      
+
+                        <EventTrigger RoutedEvent="MouseEnter" >
+
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation BeginTime="0:0:0"
+                                                         Storyboard.TargetName="PopupView"
+                                                         Storyboard.TargetProperty="Opacity"                                                     
+                                                         To="1"
+                                                         Duration="0:0:0.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation BeginTime="0:0:0"
+                                                         Storyboard.TargetName="PopupView"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0.5"
+                                                         To="0"
+                                                         Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+
+
 
                     </ControlTemplate.Triggers>
                     
@@ -186,6 +269,8 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+
         
     </Style>
     
