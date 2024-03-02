@@ -192,6 +192,24 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
+        <ControlTemplate x:Key="TwitterIcon"
+                         TargetType="{x:Type Button}">
+            <fa:ImageAwesome x:Name="IconTwitter" Icon="Twitter"
+                             Foreground="#1DA1F2" 
+                             />
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter TargetName="IconTwitter"
+                            Property="Foreground"
+                            Value="#146EB4" />
+                    
+                </Trigger>
+            </ControlTemplate.Triggers>
+
+        </ControlTemplate>
+
     </UserControl.Resources>
 
 
@@ -208,7 +226,7 @@
 
                 <Style TargetType="{x:Type StackPanel}">
                     <Setter Property="Margin"
-                            Value="10 0 0 0"></Setter>
+                            Value="10 10 0 0"></Setter>
                     <Setter Property="Width"
                             Value="500"></Setter>
                 </Style>
@@ -231,19 +249,6 @@
 
                 <TextBox Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                          Style="{DynamicResource TextBoxStyle}"></TextBox>
-
-                <!--<RichTextBox x:Name="MorseAudioTextBox"
-                             Height="120"
-                             FontSize="40"
-                            >
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin"
-                                    Value="0" />
-                        </Style>
-                    </RichTextBox.Resources>
-                </RichTextBox>-->
-                
             </StackPanel>
         </WrapPanel>
 
@@ -267,6 +272,10 @@
                     Template="{StaticResource GithubIcon}" 
                     Command="{Binding Connection}"
                     CommandParameter="{Binding ConnectionLink[Github]}"/>
+
+            <Button Style="{StaticResource ContactIconStyle}"
+                    Template="{StaticResource TwitterIcon}"
+                    Command="{Binding TronTronVN}"/>
 
         </StackPanel>
 

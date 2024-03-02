@@ -4,9 +4,27 @@
 
     <!--//Main BG//-->
     <SolidColorBrush x:Key="PrimaryBackgoundColor"
-                     Color="#f9f9f9"></SolidColorBrush>
+                     Color="#F5F5F5"></SolidColorBrush>
     <SolidColorBrush x:Key="SecundaryBackgoundColor"
-                     Color="#f3f3f3"></SolidColorBrush>
+                     Color="#F5F5F5"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="TitleBtnColor"
+                     Color="#000000"></SolidColorBrush>
+    <SolidColorBrush x:Key="TitleBtnBackgound"
+                     Color="#6F6A6A"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="MenuBackgoundColor"
+                     Color="#D3D3D3" />
+
+
+    <SolidColorBrush x:Key="PrimanySelectedBorderLine"
+                     Color="#3772FF" />
+
+    <SolidColorBrush x:Key="PrimanySelectedBackground"
+                     Color="#e0e0e0" />
+
+    <SolidColorBrush x:Key="IconColor"
+                     Color="#000000" />
 
     <!--//Text//-->
     <SolidColorBrush x:Key="PrimaryLabelColor"
@@ -19,14 +37,6 @@
                      Color="#000000" />
 
 
-
-    <SolidColorBrush x:Key="TitleBtnColor"
-                     Color="#000000"></SolidColorBrush>
-    <SolidColorBrush x:Key="TitleBtnBackgound"
-                     Color="#6F6A6A"></SolidColorBrush>
-
-    <SolidColorBrush x:Key="PrimaryBlueColor"
-                     Color="#3772FF"></SolidColorBrush>
     <SolidColorBrush x:Key="PrimaryTextColor"
                      Color="#FFFFFF"></SolidColorBrush>
     <SolidColorBrush x:Key="TextSecundaryColor"

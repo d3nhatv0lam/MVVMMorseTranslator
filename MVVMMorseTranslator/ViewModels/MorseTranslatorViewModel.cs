@@ -14,6 +14,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Security.Policy;
 using System.Data.Common;
 using System.Timers;
+using System.Windows;
 
 namespace MVVMMorseTranslator.ViewModels
 {
@@ -32,6 +33,8 @@ namespace MVVMMorseTranslator.ViewModels
 
         private ICommand _connection;
         private ICommand _playMorseAudio;
+        private ICommand _trontronVN;
+
 
 
 
@@ -126,6 +129,21 @@ namespace MVVMMorseTranslator.ViewModels
                     });
                 }
                 return _playMorseAudio;
+            }
+        }
+
+        public ICommand TronTronVN
+        {
+            get
+            {
+                if (_trontronVN == null)
+                {
+                    _trontronVN = new RelayCommand(() =>
+                    {
+                        MessageBox.Show("trời ơi nghĩ sao mà dám mở link X lên vạy =))))\nMuốn link thì hãy DM ta hehhe!", "Đừng Xin Link X :( ");
+                    });
+                }
+                return _trontronVN;
             }
         }
 

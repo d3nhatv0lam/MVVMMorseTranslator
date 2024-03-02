@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF">
 
     <!--// Lable Style //-->
     <Style x:Key="GBLabelStyle"
@@ -89,15 +90,31 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid Background="Transparent">
+
+                        <Border x:Name="SelectedBackround"
+                                Background="{DynamicResource  PrimanySelectedBackground }"
+                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="2"
+                                CornerRadius="0 6 6 0" />
+
+
                         <Border x:Name="IconSelected"
                                 Height="{TemplateBinding Height}"
-                                Background="{DynamicResource PrimaryBlueColor}"
+                                Background="{DynamicResource  PrimanySelectedBorderLine}"
                                 Opacity="0"
                                 Width="5"
                                 CornerRadius="5"
                                 HorizontalAlignment="Left"
                                 ></Border>
-                        
+
+                        <fa:FontAwesome Icon="{Binding Content , RelativeSource={RelativeSource TemplatedParent}}"
+                                        FontSize="25" 
+                                        FontWeight="ExtraLight"
+                                        Foreground="{DynamicResource IconColor}"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"/>
+
                         
                     </Grid>
 
@@ -121,12 +138,22 @@
                                                          To="0"
                                                          Duration="0:0:0.25"
                                                          BeginTime="0:0:0" />
+
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBackround"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="1"
+                                                         To="0"
+                                                         Duration="0:0:0.25"
+                                                         BeginTime="0:0:0" />
+
                                     </Storyboard>
+
                                 </BeginStoryboard>
                             </MultiTrigger.EnterActions>
+                                
+                              <!--// Don't Selected & MouseOver //-->
 
                             <MultiTrigger.ExitActions>
-
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="IconSelected"
@@ -135,6 +162,14 @@
                                                          To="1"
                                                          Duration="0:0:0.25"
                                                          BeginTime="0:0:0" />
+
+                                        <DoubleAnimation Storyboard.TargetName="SelectedBackround"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         From="0"
+                                                         To="1"
+                                                         Duration="0:0:0.25"
+                                                         BeginTime="0:0:0" />
+
                                     </Storyboard>
                                 </BeginStoryboard>
 

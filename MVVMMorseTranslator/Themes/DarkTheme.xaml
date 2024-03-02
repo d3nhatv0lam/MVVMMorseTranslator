@@ -5,8 +5,26 @@
      <!--//Main BG//-->
     <SolidColorBrush x:Key="PrimaryBackgoundColor" Color="#131725"></SolidColorBrush>
     <SolidColorBrush x:Key="SecundaryBackgoundColor" Color="#1d2335"></SolidColorBrush>
+
+
+    <SolidColorBrush x:Key="TitleBtnColor"
+                     Color="#c4c4c4"></SolidColorBrush>
+    <SolidColorBrush x:Key="TitleBtnBackgound"
+                     Color="#6F6A6A"></SolidColorBrush>
     
-    
+        <SolidColorBrush x:Key="MenuBackgoundColor"
+                     Color="#1d2335" />
+
+    <SolidColorBrush x:Key="PrimanySelectedBorderLine"
+                     Color="#3772FF" />
+
+    <SolidColorBrush x:Key="PrimanySelectedBackground"
+                     Color="#636c8a" />
+
+    <SolidColorBrush x:Key="IconColor"
+                     Color="#7ABCAC" />
+
+
     <!--//Text//-->
     <SolidColorBrush x:Key="PrimaryLabelColor"
                      Color="#ba9ffb"></SolidColorBrush>
@@ -18,8 +36,7 @@
 
 
 
-    <SolidColorBrush x:Key="TitleBtnColor" Color="#c4c4c4"></SolidColorBrush>
-    <SolidColorBrush x:Key="TitleBtnBackgound" Color="#6F6A6A"></SolidColorBrush>
+
 
     <SolidColorBrush x:Key="PrimaryBlueColor" Color="#3772FF"></SolidColorBrush>
 
