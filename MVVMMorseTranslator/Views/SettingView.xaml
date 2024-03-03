@@ -1,12 +1,41 @@
-﻿<UserControl x:Class="MVVMMorseTranslator.Views.SettingView"
+﻿<UserControl x:Name="Setting"
+             x:Class="MVVMMorseTranslator.Views.SettingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MVVMMorseTranslator.Views"
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding SettingLoaded}"
+                                   CommandParameter="{Binding ElementName=Setting}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.5"
+                                     Storyboard.TargetName="Setting"
+                                     Storyboard.TargetProperty="Opacity"
+                                     From="0"
+                                     To="1" />
+                    
+                    
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        
+       
+    </UserControl.Triggers>
+
 
     <UserControl.Resources>
 
@@ -19,13 +48,13 @@
 
             <Setter Property="HorizontalAlignment"
                     Value="Center" />
-            
+
             <Setter Property="VerticalAlignment"
                     Value="Center" />
-            
+
             <Setter Property="Margin"
                     Value="5 0 0 0" />
-            
+
         </Style>
 
 
@@ -61,33 +90,34 @@
 
 
 
-        </Style> 
-        
-        
+        </Style>
+
+
     </UserControl.Resources>
-    
-    
-    <Grid Background="{DynamicResource SecundaryBackgoundColor}" >
+
+
+    <Grid Background="{DynamicResource SecundaryBackgoundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" >
+        <StackPanel x:Name="Title"
+                    Orientation="Horizontal">
             <fa:FontAwesome Icon="Gear"
                             FontSize="80"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="10 0 0 0"
-                             Foreground="{DynamicResource TextTertiaryColor}"></fa:FontAwesome>
+                            Foreground="{DynamicResource TextTertiaryColor}"></fa:FontAwesome>
 
             <Label Grid.Row="0"
                    Content="Setting"
                    Style="{DynamicResource SettingTitleSytle}"></Label>
         </StackPanel>
-                    
-       
+
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -98,22 +128,25 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            
-            <Grid Grid.Row="0" Grid.Column="0">
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0">
                 <StackPanel Orientation="Vertical">
-                    <Label
-                           Content="WPM Setting" Style="{DynamicResource LabelSytle}"></Label>
-                    
+                    <Label Content="WPM Setting"
+                           Style="{DynamicResource LabelSytle}"></Label>
+
                     <TextBox  Text="{Binding DataContext.PageViewModels[0].WPM , RelativeSource= {RelativeSource AncestorType=Window}}"
                               Style="{DynamicResource TextBoxStyle}"></TextBox>
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0"
+                  Grid.Column="1">
                 <StackPanel Orientation="Vertical">
-                    <Label  Content="Frequency Setting" Style="{DynamicResource LabelSytle}" ></Label>
-                    
-                    <TextBox  Text ="{Binding DataContext.PageViewModels[0].Frequency , RelativeSource= {RelativeSource AncestorType=Window}}"
+                    <Label  Content="Frequency Setting"
+                            Style="{DynamicResource LabelSytle}"></Label>
+
+                    <TextBox  Text="{Binding DataContext.PageViewModels[0].Frequency , RelativeSource= {RelativeSource AncestorType=Window}}"
                               Style="{DynamicResource TextBoxStyle}"></TextBox>
                 </StackPanel>
             </Grid>
@@ -122,21 +155,20 @@
                   Grid.Column="0">
 
                 <ToggleButton x:Name="ThemeButton"
-                              Content="Theme"
+                              Content="hi"
                               IsThreeState="False"
+                              IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
                               Command="{Binding ChangeTheme}"
-                              CommandParameter="{Binding Path=IsChecked, ElementName=ThemeButton}">
-                    <ToggleButton.InputBindings>
-                        
-                        
-                        <MouseBinding Gesture="LeftClick"
-                                      />
-                        
-                        
-                    </ToggleButton.InputBindings>
+                              CommandParameter="{Binding Path=IsChecked, ElementName=ThemeButton}"
+                              Style="{StaticResource SwitchThemeStyle}">
+
                 </ToggleButton>
-             </Grid>
-            
+
+
+            </Grid>
+
+
+
         </Grid>
     </Grid>
 </UserControl>

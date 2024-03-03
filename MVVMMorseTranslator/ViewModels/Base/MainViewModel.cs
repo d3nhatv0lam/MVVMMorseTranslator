@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using MVVMMorseTranslator.Core;
 using System.Windows.Interop;
+using System.Windows.Controls.Primitives;
 
 namespace MVVMMorseTranslator.ViewModels.Base
 {
@@ -27,6 +28,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
         private ICommand _closeApp;
         private ICommand _windowLoad;
         private ICommand _windowStateChanged;
+        private ICommand _windowPositionChanged;
         private ICommand _dragMoveWindow;
 
 
@@ -139,6 +141,21 @@ namespace MVVMMorseTranslator.ViewModels.Base
                     });
                 }
                 return _windowStateChanged;
+            }
+        }
+
+        public ICommand WindowPositionChanged
+        {
+            get
+            {
+                if (_windowPositionChanged == null)
+                {
+                    _windowPositionChanged = new RelayCommand<Window>((window) =>
+                    {
+                        
+                    });
+                }
+                return _windowPositionChanged;
             }
         }
 

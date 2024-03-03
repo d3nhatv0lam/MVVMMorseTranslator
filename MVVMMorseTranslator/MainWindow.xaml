@@ -32,7 +32,12 @@
         <i:EventTrigger EventName="StateChanged">
             <i:InvokeCommandAction Command="{Binding WindowStateChanged}"></i:InvokeCommandAction>
         </i:EventTrigger>
+
+        <i:EventTrigger EventName="LocationChanged">
+            <i:InvokeCommandAction Command="{Binding WindowPositionChanged}" CommandParameter="{Binding ElementName=MainHome}"></i:InvokeCommandAction>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
+
 
 
 

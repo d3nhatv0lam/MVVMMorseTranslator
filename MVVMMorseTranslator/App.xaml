@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:MVVMMorseTranslator"
              xmlns:viewModel ="clr-namespace:MVVMMorseTranslator.ViewModels"
              xmlns:view ="clr-namespace:MVVMMorseTranslator.Views"
+             
              >
 
     <Application.Resources>
@@ -16,6 +17,7 @@
 
                 <ResourceDictionary Source="Themes\LightTheme.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources\Styles\ElementStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources\Styles\SwitchThemeToggleButton.xaml" />
 
 
             </ResourceDictionary.MergedDictionaries>

@@ -1,0 +1,503 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:james="https://jamesnet.dev/xaml/presentation">
+
+
+
+    <Style x:Key="RoundGridStyle"
+           TargetType="{x:Type Grid}">
+
+        <Setter Property="Width"
+                Value="120" />
+        <Setter Property="Height"
+                Value="50" />
+        <Setter Property="Clip">
+            <Setter.Value>
+                <RectangleGeometry Rect="0,0,120,50">
+
+                    <RectangleGeometry.RadiusX>25</RectangleGeometry.RadiusX>
+                    <RectangleGeometry.RadiusY>25</RectangleGeometry.RadiusY>
+
+                </RectangleGeometry>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SwitchThemeBorderStyle"
+           TargetType="{x:Type Border}">
+        <Setter Property="Background"
+                Value="#8CBCFA" />
+
+    </Style>
+
+    <Style x:Key="CloudStyle"
+           TargetType="{x:Type Control}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Grid Width="60"
+                          Height="30">
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="26,1,16,12" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="36, 2 ,7 11" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="10 12 33 1" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="23 12 20 1" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="32 13 11 0" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="43 8 0 5" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="16 1 27 12" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="4 1 39 12" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="4 1 39 12" />
+                        <Ellipse Width="17"
+                                 Height="17"
+                                 Fill="#FFFFFF"
+                                 Margin="0 8 43 5" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="GalaxyStyle"
+           TargetType="{x:Type Control}">
+
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Grid Width="80"
+                          Height="50">
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="23 27 56 22" />
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="12 12 67 37" />
+
+
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="40 21 39 28" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="48 6 31 43" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="68 30 11 19" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="4 24 75 24" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="8 28 71 22" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="21 6 58 42" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="51 27 28 22" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="28 39 50 10" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="30 39 50 10" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="67 8 12 41" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="26 14 53 35" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="63 20 16 29" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="16 35 63 14" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#55FFFFFF"
+                                   Margin="60 35 19 14" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="36 6 43 43" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="55 12 24 37" />
+
+                        <Rectangle Width="1"
+                                   Height="1"
+                                   Fill="#FFFFFF"
+                                   Margin="43 37 36 12" />
+
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="SwitchThemeEllipse"
+           TargetType="{x:Type Ellipse}">
+        <Setter Property="Width"
+                Value="42" />
+        <Setter Property="Height"
+                Value="42" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="Fill"
+                Value="#FFB15F" />
+
+ 
+
+    </Style>
+
+    <Storyboard x:Key="UserControlLoadSlideOut">
+        <james:ThickItem TargetName="Cloud1"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="-70 20 0 0"
+                         To="-70 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud2"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="-60 30 0 0"
+                         To="-60 30 0 0" />
+
+        <james:ThickItem TargetName="Cloud3"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"   
+                         Duration="0:0:0.5"
+                         From="135 20 0 0"
+                         To="135 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud4"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="125 30 0 0"
+                         To="125 30 0 0" />
+
+        <james:ThickItem TargetName="ellipse"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="74 4 4 4"
+                         To="74 4 4 4 " />
+
+        <james:ThickItem TargetName="galaxy"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="0 0 0 0"
+                         To="0 0 0 0" />
+
+        <james:ColorItem TargetName="Border"
+                         Property="(Background).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="#191C25"
+                         To="#191C25" />
+
+        <james:ColorItem TargetName="ellipse"
+                         Property="(Fill).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="#E5B91A"
+                         To="#E5B91A" />
+
+        <james:ValueItem TargetName="galaxy"
+                         Property="Opacity"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         From="1"
+                         To="1" />
+
+
+
+    </Storyboard>
+
+
+    <Storyboard x:Key="SlideOut">
+        <james:ThickItem TargetName="Cloud1"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="-70 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud2"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="-60 30 0 0" />
+
+        <james:ThickItem TargetName="Cloud3"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="135 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud4"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="125 30 0 0" />
+
+        <james:ThickItem TargetName="ellipse"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="74 4 4 4 " />
+
+        <james:ThickItem TargetName="galaxy"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="0 0 0 0" />
+
+        <james:ColorItem TargetName="Border"
+                         Property="(Background).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="#191C25" />
+
+        <james:ColorItem TargetName="ellipse"
+                         Property="(Fill).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="#E5B91A" />
+
+        <james:ValueItem TargetName="galaxy"
+                         Property="Opacity"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="1" />
+
+
+
+    </Storyboard>
+
+    <Storyboard x:Key="SlideIn">
+        <james:ThickItem TargetName="Cloud1"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="-10 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud2"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="0 30 0 0" />
+
+        <james:ThickItem TargetName="Cloud3"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="60 20 0 0" />
+
+        <james:ThickItem TargetName="Cloud4"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="55 30 0 0" />
+
+        <james:ThickItem TargetName="ellipse"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="4 4 4 4" />
+
+        <james:ColorItem TargetName="ellipse"
+                         Property="(Fill).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="#FFB15F" />
+
+        <james:ThickItem TargetName="galaxy"
+                         Property="Margin"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="0 -60 0 0" />
+
+        <james:ColorItem TargetName="Border"
+                         Property="(Background).Color"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="#8CBCFA" />
+
+        <james:ValueItem TargetName="galaxy"
+                         Property="Opacity"
+                         Mode="CubicEaseInOut"
+                         Duration="0:0:0.5"
+                         To="0" />
+    </Storyboard>
+
+
+
+    <Style x:Key="SwitchThemeStyle"
+           TargetType="{x:Type ToggleButton}">
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                    <Grid Style="{StaticResource RoundGridStyle}">
+
+                        <Border x:Name="Border"
+                                Style="{StaticResource SwitchThemeBorderStyle}" />
+
+
+                        <Control x:Name="Cloud1"
+                                 Style="{StaticResource CloudStyle}"
+                                 Opacity="0.5"
+                                 Margin="-10 20 0 0" />
+                        <Control x:Name="Cloud2"
+                                 Style="{StaticResource CloudStyle}"
+                                 Opacity="1"
+                                 Margin="0 30 0 0" />
+                        <Control x:Name="Cloud3"
+                                 Style="{StaticResource CloudStyle}"
+                                 Opacity="0.5"
+                                 Margin="60 20 0 0" />
+                        <Control x:Name="Cloud4"
+                                 Style="{StaticResource CloudStyle}"
+                                 Opacity="1"
+                                 Margin="55 30 0 0" />
+
+                        <Control x:Name="galaxy"
+                                 Style="{StaticResource GalaxyStyle}"
+                                 Opacity="0" />
+
+                        <Ellipse x:Name="ellipse"
+                                 Style="{StaticResource  SwitchThemeEllipse}"
+                                 Margin="4 0 0 0" />
+
+
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        
+                        
+                        
+
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource SlideOut}" />
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource SlideIn}" />
+                            </Trigger.ExitActions>
+                        </Trigger>
+
+
+                        
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSettingLoaded}"
+                                           Value="True">
+                                </Condition>
+                                <Condition Binding="{Binding IsDarkTheme}"
+                                           Value="True">
+                                </Condition>
+
+                            </MultiDataTrigger.Conditions>
+
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource UserControlLoadSlideOut}" />
+                            </MultiDataTrigger.EnterActions>
+
+                        </MultiDataTrigger>
+
+
+
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

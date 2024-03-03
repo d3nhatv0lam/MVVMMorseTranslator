@@ -121,15 +121,16 @@
                                         HorizontalAlignment="Center" />
 
                         <!--// PopUp Style //-->
-                        <Popup x:Name="PopupView" 
+                        <Popup x:Name="PopupView"
                                SnapsToDevicePixels="True"
                                IsOpen="True"
                                Placement="Right"
+                               PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                VerticalOffset="10"
                                AllowsTransparency="True"
                                Opacity="0"
-                               Tag="{Binding Path=Opacity, RelativeSource={RelativeSource self}, Mode=TwoWay}"
-                               >
+                               Tag="{Binding Path=Opacity, RelativeSource={RelativeSource self}, Mode=TwoWay}">
+
 
                             <Border Opacity="{Binding ElementName=PopupView, Path=Opacity}"
                                     Background="Blue"
@@ -229,9 +230,16 @@
 
                         <!--// PopUp Animation //-->
 
+                        <!--//Update PopUp when change size //-->
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="PopupView"
+                                    Property="VerticalOffset"
+                                    Value="11"></Setter>
+                        </Trigger>
 
-                        <EventTrigger RoutedEvent="MouseEnter" >
 
+                        <EventTrigger RoutedEvent="MouseEnter">
                             <EventTrigger.Actions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -260,6 +268,8 @@
                                 </BeginStoryboard>
                             </EventTrigger.Actions>
                         </EventTrigger>
+                        
+                        
 
 
 

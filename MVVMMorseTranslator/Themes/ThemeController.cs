@@ -50,7 +50,6 @@ namespace MVVMMorseTranslator.Themes
 
             CurrentTheme = new ResourceDictionary {Source = new Uri($"Themes\\{ThemeName}.xaml", UriKind.Relative) };
 
-            Debug.WriteLine(CurrentTheme.ToString());
         }
 
 
