@@ -177,7 +177,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
         public List<ViewModelBase> PageViewModels
         {
             get
-            {
+               {
                 return _navigation.PageViewModels;
             }
         }

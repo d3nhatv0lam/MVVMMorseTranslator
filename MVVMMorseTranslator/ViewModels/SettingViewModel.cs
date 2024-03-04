@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -50,27 +52,29 @@ namespace MVVMMorseTranslator.ViewModels
             {
                 if (_settingLoaded == null)
                 {
-                    _settingLoaded = new RelayCommand<UserControl>((userControl) => 
+                    _settingLoaded = new RelayCommand(() => 
                     {
-                        IsSettingLoaded = true;
+                        IsSettingLoaded = !IsSettingLoaded;
                     });
                 }
                 return _settingLoaded;
             }
         }
+
         public ICommand ChangeTheme
         {
             get
             {
                 if (_changeTheme == null)
                 {
-
+                   
                     _changeTheme = new RelayCommand<bool>((newTheme) =>
                     {
-                        IsSettingLoaded = false;
-                        int NewTheme = newTheme ? 1 : 0;
+                        IsDarkTheme = !IsDarkTheme;
+                        int NewTheme = IsDarkTheme ? 1 : 0;
                         _themeController.ChangeTheme(NewTheme);
                     });
+                    
                 }
                 return _changeTheme;
             }
@@ -81,6 +85,16 @@ namespace MVVMMorseTranslator.ViewModels
         {
             _themeController = new ThemeController();
             _settingModel = new SettingModel();
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    Debug.WriteLine("setting " + IsSettingLoaded);
+                    Debug.WriteLine("Dark " + IsDarkTheme);
+                }
+                
+            });
         }
     }
 }

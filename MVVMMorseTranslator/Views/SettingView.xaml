@@ -6,17 +6,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MVVMMorseTranslator.Views"
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+             xmlns:ControlViews ="clr-namespace:MVVMMorseTranslator.Resources.Controls"
              mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignWidth="800" >
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding SettingLoaded}"
-                                   CommandParameter="{Binding ElementName=Setting}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -27,10 +22,10 @@
                                      Storyboard.TargetProperty="Opacity"
                                      From="0"
                                      To="1" />
-                    
-                    
+
                 </Storyboard>
             </BeginStoryboard>
+
         </EventTrigger>
         
        
@@ -96,7 +91,7 @@
     </UserControl.Resources>
 
 
-    <Grid Background="{DynamicResource SecundaryBackgoundColor}">
+    <Grid Background="{DynamicResource SecundaryBackgoundColor}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -154,15 +149,23 @@
             <Grid Grid.Row="1"
                   Grid.Column="0">
 
-                <ToggleButton x:Name="ThemeButton"
-                              Content="hi"
+                <ControlViews:SwitchThemeToggleButton x:Name="ThemeButton">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding ChangeTheme}"
+                                                   CommandParameter="{Binding IsChecked}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                </ControlViews:SwitchThemeToggleButton>
+
+                <!--<ToggleButton x:Name="ThemeButton"
                               IsThreeState="False"
                               IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
                               Command="{Binding ChangeTheme}"
                               CommandParameter="{Binding Path=IsChecked, ElementName=ThemeButton}"
                               Style="{StaticResource SwitchThemeStyle}">
 
-                </ToggleButton>
+                </ToggleButton>-->
 
 
             </Grid>
