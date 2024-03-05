@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:SettingViewModel}"
              
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="550">
+             d:DesignHeight="450" d:DesignWidth="550" >
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -23,8 +23,14 @@
                         TotalTicks="1">
             <i:InvokeCommandAction Command="{Binding SettingLoaded}" />
         </i:TimerTrigger>
+
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding SettingUnloaded}" />
+        </i:EventTrigger>
         
     </i:Interaction.Triggers>
+
+
 
 
 

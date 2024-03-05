@@ -53,6 +53,10 @@ namespace MVVMMorseTranslator.ViewModels.Base
                         p => {
 
                             _navigation.changeViewModel((ViewModelBase)p);
+
+                            // Unload UserControl Property, Fixed bug when change Home so fast > 500ms
+                            (PageViewModels[1] as SettingViewModel).SettingUnLoaded.Execute(null);
+
                             OnPropertyChanged(nameof(CurrentViewModel));
                         },
                         p => true);

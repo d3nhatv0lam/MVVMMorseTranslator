@@ -25,6 +25,7 @@ namespace MVVMMorseTranslator.ViewModels
 
         private ICommand _changeTheme;
         private ICommand _settingLoaded;
+        private ICommand _settingUnLoaded;
         public bool IsDarkTheme
         {
             get => _settingModel.isDarkTheme;
@@ -58,6 +59,21 @@ namespace MVVMMorseTranslator.ViewModels
                     });
                 }
                 return _settingLoaded;
+            }
+        }
+
+        public ICommand SettingUnLoaded
+        {
+            get
+            {
+                if (_settingUnLoaded == null)
+                {
+                    _settingUnLoaded = new RelayCommand(() =>
+                    {
+                        IsSettingLoaded = false;
+                    });
+                }
+                return _settingUnLoaded;
             }
         }
 
