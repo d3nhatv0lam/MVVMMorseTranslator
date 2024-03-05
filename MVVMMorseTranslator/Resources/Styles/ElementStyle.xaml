@@ -14,6 +14,15 @@
         <Setter Property="Foreground"
                 Value="{DynamicResource PrimaryLabelColor}"></Setter>
 
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+
+        <Setter Property="FontWeight"
+                Value="Medium" />
+
     </Style>
     
     

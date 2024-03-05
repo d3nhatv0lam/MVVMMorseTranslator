@@ -102,7 +102,10 @@
         <Style x:Key="LabelStyle"
                TargetType="{x:Type Label}"
                BasedOn="{StaticResource GBLabelStyle}">
-            
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+
             <Style.Triggers>
                 <Trigger Property="Content"
                          Value="MorseCode">

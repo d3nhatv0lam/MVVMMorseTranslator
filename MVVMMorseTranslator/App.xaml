@@ -22,6 +22,8 @@
 
             </ResourceDictionary.MergedDictionaries>
 
+            <FontFamily x:Key="TitleFont">.Resources\Fonts\TAHOMAB0.TTF</FontFamily>
+
 
             <!--// MVVM View Setup //-->
             <DataTemplate DataType="{x:Type viewModel:MorseTranslatorViewModel}">

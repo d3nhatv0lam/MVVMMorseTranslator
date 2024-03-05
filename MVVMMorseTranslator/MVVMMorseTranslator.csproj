@@ -284,6 +284,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\TAHOMAB0.TTF" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

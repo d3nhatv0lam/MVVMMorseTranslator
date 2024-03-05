@@ -102,15 +102,15 @@ namespace MVVMMorseTranslator.ViewModels
             _themeController = new ThemeController();
             _settingModel = new SettingModel();
 
-            Task.Run(() =>
-            {
-                while (true)
-                {
-                    Debug.WriteLine("setting " + IsSettingLoaded);
-                    Debug.WriteLine("Dark " + IsDarkTheme);
-                }
+            //Task.Run(() =>
+            //{
+            //    while (true)
+            //    {
+            //        Debug.WriteLine("setting " + IsSettingLoaded);
+            //        Debug.WriteLine("Dark " + IsDarkTheme);
+            //    }
                 
-            });
+            //});
         }
     }
 }
