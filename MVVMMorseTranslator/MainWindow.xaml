@@ -12,7 +12,8 @@
         Width="800"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        WindowStyle="None">
+        WindowStyle="None"
+        Icon="Resources\Icon\Icon.ico">
 
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0"
@@ -45,27 +46,6 @@
 
 
     <Window.Resources>
-        <!--// Main Navigation Icon Style //-->
-        <!--<Style TargetType="{x:Type RadioButton}">
-            <Setter Property="Height"
-                    Value="50"></Setter>
-            <Setter Property="Width"
-                    Value="{Binding Path=Width, RelativeSource={RelativeSource AncestorLevel=1 , AncestorType=StackPanel,Mode=FindAncestor}}"></Setter>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid>
-                            <Label  Content="X"
-                                    Height="50"
-                                    Width="50"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Left"></Label>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
 
         <!--//Title Btn Template//-->
         <ControlTemplate x:Key="MinimizeBtn"
@@ -162,6 +142,13 @@
                              Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                              CommandParameter="{Binding PageViewModels[2]}"></RadioButton>
 
+                <RadioButton Content="Search"
+                             Tag=" References "
+                             Style="{DynamicResource IconNavigaion}"
+                             Command="{Binding DataContext.ChangePageCommand , RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                             CommandParameter="{Binding PageViewModels[3]}"></RadioButton>
+    
+                
                 
             </StackPanel>
 

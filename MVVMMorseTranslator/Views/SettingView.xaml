@@ -143,29 +143,23 @@
 
             <Grid Grid.Row="1"
                   Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <ControlViews:SwitchThemeToggleButton x:Name="ThemeButton">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Checked">
-                            <i:InvokeCommandAction Command="{Binding ChangeTheme}"
-                                                   CommandParameter="{Binding IsChecked}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
+                <Grid Grid.Row="0">
+                    <Label Content="Day/Night" Margin="0 5 0 0" Style="{DynamicResource LabelSytle}"></Label>
+                </Grid>
+
+                <ControlViews:SwitchThemeToggleButton Grid.Row="1" x:Name="ThemeButton"
+                                                      Margin="30 0 0 15"
+                                                      HorizontalAlignment ="Left">
                 </ControlViews:SwitchThemeToggleButton>
 
-                <!--<ToggleButton x:Name="ThemeButton"
-                              IsThreeState="False"
-                              IsChecked="{Binding IsDarkTheme, Mode=TwoWay}"
-                              Command="{Binding ChangeTheme}"
-                              CommandParameter="{Binding Path=IsChecked, ElementName=ThemeButton}"
-                              Style="{StaticResource SwitchThemeStyle}">
-
-                </ToggleButton>-->
-
+              
 
             </Grid>
-
-
 
         </Grid>
     </Grid>

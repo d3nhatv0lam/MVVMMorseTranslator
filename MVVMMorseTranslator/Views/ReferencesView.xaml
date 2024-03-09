@@ -1,0 +1,194 @@
+﻿<UserControl x:Name="ReferenceView"
+            x:Class="MVVMMorseTranslator.Views.ReferencesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMMorseTranslator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.5"
+                                     Storyboard.TargetName="ReferenceView"
+                                     Storyboard.TargetProperty="Opacity"
+                                     From="0"
+                                     To="1" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <UserControl.Resources>
+
+        <Storyboard x:Key="Fadein" >
+            <DoubleAnimation 
+                             Duration="0:0:0.5"
+                             Storyboard.TargetName="LabelReason2"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1" />
+
+        </Storyboard>
+
+        <Storyboard x:Key="FadeOut">
+            <DoubleAnimation 
+                             Duration="0:0:0.5"
+                             Storyboard.TargetName="LabelReason2"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1"
+                             To="0" />
+
+        </Storyboard>
+
+
+
+        <Style x:Key="TitleStyle"
+               TargetType="{x:Type Label}" BasedOn="{StaticResource GBLabelStyle}">
+
+            <Setter Property="Margin"
+                    Value="10 0 0 0" />
+        </Style>
+
+        <Style x:Key="IconStyle"
+               TargetType="{x:Type Path}">
+            <Setter Property="Height"
+                    Value="65" />
+            <Setter Property="Width"
+                    Value="65" />
+            <Setter Property="Margin"
+                    Value="10 0 0 0" />
+            <Setter Property="Stretch"
+                    Value="Uniform" />
+            <Setter Property="Fill"
+                    Value="{DynamicResource TextTertiaryColor}" />
+        </Style>
+
+
+
+        <Style x:Key="LabelTileStyle"
+               TargetType="{x:Type Label}" BasedOn="{StaticResource GBLabelStyle}">
+
+            <Setter Property="Width"
+                    Value="auto" />
+
+            <Setter Property="Height"
+                    Value="auto" />
+
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+
+            <Setter Property="FontSize"
+                    Value="25" />
+
+        </Style>
+
+        <Style x:Key="TextBlockStyle"
+               TargetType="{x:Type TextBlock}"
+               BasedOn="{StaticResource GBTextBlockStyle}">
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+
+            <Setter Property="FontSize"
+                    Value="30" />
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+
+            <Setter Property="Margin"
+                    Value="5 0 0 0" />
+
+            <Setter Property="FontWeight"
+                    Value="Regular" />
+
+
+
+        </Style>
+
+
+        
+    </UserControl.Resources>
+    
+    <Grid Background="{DynamicResource SecundaryBackgoundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+    
+            <!--// Title //-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+            <Path Style="{DynamicResource IconStyle}"
+                  Data="M9.05,9H7.06V6H9.05V4.03H7.06V3.03C7.06,1.92 7.95,1.04 9.05,1.04H15.03V8L17.5,6.5L20,8V1.04H21C22.05,1.04 23,2 23,3.03V17C23,18.03 22.05,19 21,19H9.05C8,19 7.06,18.05 7.06,17V16H9.05V14H7.06V11H9.05V9M1,18H3V15H1V13H3V10H1V8H3V5H5V8H3V10H5V13H3V15H5V18H3V20H5V21H21V23H5A2,2 0 0,1 3,21V20H1V18Z">
+            </Path>
+            
+            <Label 
+                   Content="Reference"
+                   Style="{DynamicResource TitleStyle}"></Label>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Style="{DynamicResource LabelTileStyle}">
+                <TextBlock Text="{Binding Thanks}"
+                           TextDecorations="Underline" />
+            </Label>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       Content="{Binding Person1}"
+                       FontWeight="Bold"
+                       Style="{DynamicResource LabelTileStyle}">
+                </Label>
+
+                <TextBlock  Grid.Column="1"
+                        Text="{Binding Reason1}"
+                           Style="{DynamicResource TextBlockStyle}" />
+
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                <Label Grid.Column="0"
+                       Content="{Binding Person2}"
+                       FontWeight="Bold"
+                       Style="{DynamicResource LabelTileStyle}" />
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Reason2}"
+                           Style="{DynamicResource TextBlockStyle}" />
+
+            </Grid>
+
+        </Grid>
+        
+        
+    </Grid>
+</UserControl>

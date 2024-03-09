@@ -37,6 +37,10 @@
             <DataTemplate DataType="{x:Type viewModel:AboutAppViewModel}">
                 <view:AboutAppView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ReferencesViewModel}">
+                <view:ReferencesView />
+            </DataTemplate>
                 
                 
         </ResourceDictionary>

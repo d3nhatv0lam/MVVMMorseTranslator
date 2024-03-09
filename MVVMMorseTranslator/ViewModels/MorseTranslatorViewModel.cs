@@ -63,7 +63,7 @@ namespace MVVMMorseTranslator.ViewModels
             set
             {
                 _morse.MorseCode = value;
-
+                _morseAudio._isCreateTransAudio = false;
                 OnPropertyChanged(nameof(Alphabet));
             }
         }
