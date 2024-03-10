@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MVVMMorseTranslator.Views"
+                xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
              mc:Ignorable="d"
              d:DesignHeight="450"
@@ -51,7 +52,22 @@
                             Width="30"
                             Height="30"
                             Margin="0 0 10 5"
-                            Command="{Binding PlayMorseAudio}">
+                            >
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding PlayMorseAudio}" />
+
+                                <i:InvokeCommandAction Command="{Binding LoadMorseAudioText}"
+                                                       CommandParameter="{Binding ElementName=MorseAudioText}" />
+
+                                <i:InvokeCommandAction Command="{Binding LoadAlphabetAudioText}"
+                                                       CommandParameter="{Binding ElementName=AlphabetAudioText}" />
+
+                                
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <fa:ImageAwesome x:Name="PlayBtn"
@@ -65,6 +81,8 @@
                                         <Setter TargetName="PlayBtn"
                                                 Property="Foreground"
                                                 Value="Gray"></Setter>
+                                        
+                                        
                                     </Trigger>
 
                                     <DataTrigger Binding="{Binding Path=IsPlayingMorseAudio}"
@@ -73,7 +91,7 @@
                                         <Setter TargetName="PlayBtn"
                                                 Property="Icon"
                                                 Value="VolumeUp" />
-                                        
+
                                     </DataTrigger>
 
                                     <DataTrigger Binding="{Binding Path=IsPlayingMorseAudio}"
@@ -121,7 +139,64 @@
         <Style x:Key="TextBoxStyle"
                TargetType="{x:Type TextBox}"
                BasedOn="{StaticResource GBTextBoxStyle}">
-                
+
+        </Style>
+        
+
+
+            <!--// Morse Trace Text //-->
+        <Style x:Key="MorseCodeTextBoxStyle"
+               TargetType="{x:Type TextBox}"
+               BasedOn="{StaticResource GBTextBoxStyle}">
+
+            <Setter Property="Opacity"
+                    Value="1" />
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPlayingMorseAudio}"
+                             Value="True">
+                    <Setter Property="Opacity"
+                            Value="0" />
+
+                    <Setter Property="Visibility"
+                            Value="Collapsed" />
+
+                    <Setter Property="Panel.ZIndex"
+                            Value="-1" />
+
+                </DataTrigger>
+            </Style.Triggers>
+            
+        </Style>
+        
+        
+            <!--// Audio Trace Text //-->
+        <Style x:Key="AudioTextStyle"
+               
+               TargetType="{x:Type TextBlock}"
+               BasedOn="{StaticResource GBMorseAudioTextkStyle}">
+
+            <Setter Property="Background"
+                    Value="Transparent" />
+
+            <Setter Property="Height"
+                    Value="auto"></Setter>
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+
+            <Setter Property="Visibility"
+                    Value="Hidden" />
+
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPlayingMorseAudio}"
+                             Value="True">
+                    <Setter Property="Visibility"
+                            Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+            
         </Style>
 
         <!--// Contact Icon Style //-->
@@ -249,6 +324,12 @@
                             Value="500"></Setter>
                 </Style>
 
+                <Style TargetType="{x:Type Grid}">
+                    <Setter Property="Width"
+                            Value="500"></Setter>
+
+                </Style>
+
 
             </WrapPanel.Resources>
 
@@ -257,16 +338,60 @@
                 <Label Content="Alphabet"
                        Style="{DynamicResource LabelStyle}"></Label>
 
-                <TextBox Text="{Binding DataContext.PageViewModels[0].Alphabet,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         Style="{DynamicResource TextBoxStyle}"></TextBox>
+                <Grid>
+
+                    <Border CornerRadius="10"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="3"
+                            BorderBrush="Transparent">
+                        <ScrollViewer CanContentScroll="True"
+                                      VerticalScrollBarVisibility="auto"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Height="120">
+
+                            <TextBlock Name="AlphabetAudioText"
+                                       Foreground="Red"
+                                       Style="{DynamicResource AudioTextStyle}"></TextBlock>
+
+                        </ScrollViewer>
+                    </Border>
+
+
+                    <TextBox Text="{Binding DataContext.PageViewModels[0].Alphabet,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Style="{DynamicResource MorseCodeTextBoxStyle}"></TextBox>
+                </Grid>
+
+                
             </StackPanel>
 
+                    <!--// Main Morse Code TextBox //-->
             <StackPanel Orientation="Vertical">
                 <Label Content="MorseCode"
                        Style="{DynamicResource LabelStyle}"></Label>
+                <Grid>
+                    <Border CornerRadius="10"
+                            SnapsToDevicePixels="True"
+                            BorderThickness="3"
+                            BorderBrush="Transparent">
+                        <ScrollViewer CanContentScroll="True"
+                                      VerticalScrollBarVisibility="auto"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Height="120">
 
-                <TextBox Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         Style="{DynamicResource TextBoxStyle}"></TextBox>
+                            <TextBlock Name="MorseAudioText"
+                                       Foreground="Red"
+                                       Style="{DynamicResource AudioTextStyle}"></TextBlock>
+
+
+                        </ScrollViewer>
+                    </Border>
+
+                    <TextBox x:Name="MorseTextBox"
+                             Text="{Binding DataContext.PageViewModels[0].MorseCode,RelativeSource={RelativeSource AncestorType=Window}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Style="{DynamicResource MorseCodeTextBoxStyle}">
+                    </TextBox>
+
+                </Grid>
             </StackPanel>
         </WrapPanel>
 

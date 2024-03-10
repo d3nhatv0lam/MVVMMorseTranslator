@@ -23,11 +23,11 @@ namespace MVVMMorseTranslator.Models
         // data to create Auido
         private int _WPM = 20;
         private int _Frequency = 600;
-        private int Dot;
-        private int Dash;
-        private int RushWait;
-        private int CharacterWait;
-        private int Wait;
+        public int Dot;
+        public int Dash;
+        public int RushWait;
+        public int CharacterWait;
+        public int Wait;
 
         public bool _isCreateTransAudio = false;
         private MediaPlayer _morseMediaPlayer = new MediaPlayer();
@@ -190,6 +190,7 @@ namespace MVVMMorseTranslator.Models
             List<AudioFileReader> AudioPart = new List<AudioFileReader>();
             for (var i = 0; i < MorseCode.Length; i++)
             {
+                
                 String path = "";
                 // Add another WAV file to merge
                 switch (MorseCode[i])
@@ -209,6 +210,7 @@ namespace MVVMMorseTranslator.Models
                     default:
                         break;
                 }
+
 
                 // check this String " / "
                 if (!String.IsNullOrEmpty(path))

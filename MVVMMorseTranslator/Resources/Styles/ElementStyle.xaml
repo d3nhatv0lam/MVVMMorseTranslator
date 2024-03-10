@@ -109,6 +109,29 @@
         </Setter>
     </Style>
 
+
+    <Style x:Key="GBMorseAudioTextkStyle"
+           TargetType="{x:Type TextBlock}">
+        
+    
+        <Setter Property="FontSize"
+                Value="40"></Setter>
+        <Setter Property="Margin"
+                Value="3 3 0 0 " />
+        <Setter Property="Padding"
+                Value="0 0 0 5"></Setter>
+        <Setter Property="TextWrapping"
+                Value="Wrap"></Setter>
+
+
+
+        <Setter Property="Background"
+                Value="{DynamicResource PrimaryTextBoxBGColor}"></Setter>
+        <Setter Property="Foreground"
+                Value="{DynamicResource PrimaryTextBoxFGColor}"></Setter>
+
+    </Style>
+
     <Style x:Key="IconNavigaion"
            TargetType="{x:Type RadioButton}">
 

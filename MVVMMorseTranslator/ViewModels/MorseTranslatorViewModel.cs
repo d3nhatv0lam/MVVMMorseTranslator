@@ -15,6 +15,12 @@ using System.Security.Policy;
 using System.Data.Common;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls;
+using System.Security.Cryptography;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Runtime.ConstrainedExecution;
+using NAudio.Wave;
 
 namespace MVVMMorseTranslator.ViewModels
 {
@@ -33,6 +39,8 @@ namespace MVVMMorseTranslator.ViewModels
 
         private ICommand _connection;
         private ICommand _playMorseAudio;
+        private ICommand _loadAlphabetAudioText;
+        private ICommand _loadMorseAudioText;
         private ICommand _trontronVN;
 
 
@@ -119,6 +127,7 @@ namespace MVVMMorseTranslator.ViewModels
                 {
                     _playMorseAudio = new RelayCommand(() =>
                     {
+                        Alphabet = Alphabet;
                         if (!_morseAudio._isCreateTransAudio)
                         {
                             _morseAudio.CreateTransAudio(MorseCode);
@@ -129,6 +138,30 @@ namespace MVVMMorseTranslator.ViewModels
                     });
                 }
                 return _playMorseAudio;
+            }
+        }
+
+        public ICommand LoadAlphabetAudioText
+        {
+            get
+            {
+                if (_loadAlphabetAudioText == null)
+                {
+                    _loadAlphabetAudioText = new RelayCommand<TextBlock>((textBlock) => FillAlphabetText(textBlock));
+                }
+                return _loadAlphabetAudioText;
+            }
+        }
+
+        public ICommand LoadMorseAudioText
+        {
+            get
+            {
+                if (_loadMorseAudioText == null)
+                {
+                    _loadMorseAudioText = new RelayCommand<TextBlock>((textBlock) => FillMorseCodeText(textBlock));
+                }
+                return _loadMorseAudioText;
             }
         }
 
@@ -150,6 +183,170 @@ namespace MVVMMorseTranslator.ViewModels
         public MorseTranslatorViewModel()
         {
            
+        }
+
+        private CancellationTokenSource cts_morse;
+        private CancellationTokenSource cts_Alphabet;
+
+        private async void FillAlphabetText(TextBlock textBlock)
+        {
+            textBlock.Text = String.Empty;
+            if (cts_Alphabet == null)
+            {
+                cts_Alphabet = new CancellationTokenSource();
+                try
+                {
+                    await ColorAlphabetText(textBlock, cts_Alphabet.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                }
+                finally
+                {
+                    cts_Alphabet = null;
+                }
+            }
+            else
+            {
+                cts_Alphabet.Cancel();
+                cts_Alphabet = null;
+                textBlock.Text = String.Empty;
+            }
+        }
+
+        private async void FillMorseCodeText(TextBlock textBlock)
+        {
+            textBlock.Text = String.Empty;
+            if (cts_morse == null)
+            {
+                cts_morse = new CancellationTokenSource();
+                try
+                {
+                    await ColorMorseText(textBlock, cts_morse.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                }
+                finally
+                {
+                    cts_morse = null;
+                }
+            }
+            else
+            {
+                cts_morse.Cancel();
+                cts_morse = null;
+                textBlock.Text = String.Empty;
+            }
+            
+        }
+
+        private async Task ColorAlphabetText(TextBlock textBlock , CancellationToken token)
+        {
+            String AlphabetText = Alphabet.ToUpper();
+
+            for (int i = 0; i < AlphabetText.Length; i++)
+            {
+                token.ThrowIfCancellationRequested();
+
+                textBlock.Dispatcher.Invoke(() =>
+                {
+                    textBlock.Text += AlphabetText[i];
+                });
+
+                String MorseOfChar = _morse.GetMorseOfChar(AlphabetText[i]);
+
+                for (int j = 0; j < MorseOfChar.Length; j++)
+                {
+                    int timeDelay = 0;
+                    switch (MorseOfChar[j])
+                    {
+                        case '.':
+                            timeDelay = _morseAudio.Dot;
+                            break;
+                        case '-':
+                            timeDelay = _morseAudio.Dash;
+                            break;
+                        case '/':
+                            timeDelay = _morseAudio.Wait;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (MorseOfChar[j] is '.' || MorseOfChar[j] is '-')
+                    {
+                        if (j + 1 < MorseOfChar.Length)
+                            timeDelay += _morseAudio.RushWait;
+                        else
+                            if (i + 1 < AlphabetText.Length && AlphabetText[i + 1] != ' ')
+                            timeDelay += 3 * _morseAudio.RushWait;
+
+                    }
+
+                    //textBlock.Dispatcher.Invoke(() =>
+                    //{
+                    //    textBlock.Text += MorseOfChar[j];
+                    //});
+
+                    await Task.Delay(timeDelay);
+                }
+
+
+
+
+            }
+        }
+
+        private async Task ColorMorseText(TextBlock textBlock , CancellationToken token)
+        {
+            for (int i = 0; i < MorseCode.Length; i++)
+            {
+                token.ThrowIfCancellationRequested();
+                int timeDelay = 0;
+                switch (MorseCode[i])
+                {
+                    case '.':
+                        timeDelay = _morseAudio.Dot;
+                        break;
+                    case '-':
+                        timeDelay = _morseAudio.Dash;
+                        break;
+                    case '/':
+                        timeDelay = _morseAudio.Wait;
+                        break;
+                    case ' ':
+                        timeDelay = ((i + 1 < MorseCode.Length) && (MorseCode[i + 1] == '/' || MorseCode[i - 1] == '/')) ? 0 : _morseAudio.RushWait;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (timeDelay != 0)
+                {
+                    // space = CharacterWait = 3 Dot
+                    if (MorseCode[i] is ' ')
+                    {
+                        timeDelay += 2 * _morseAudio.RushWait;
+                    }
+                    else 
+
+                    if (MorseCode[i] is '.' || MorseCode[i] is '-')
+                    {
+                        if ((i + 1 < MorseCode.Length) && (MorseCode[i + 1] != ' '))
+                            timeDelay += _morseAudio.RushWait;
+                    }
+                }
+
+                textBlock.Dispatcher.Invoke(() =>
+                    {
+                        textBlock.Text += MorseCode[i];
+                    });
+
+
+                 await Task.Delay(timeDelay);
+            }
+
         }
 
     }

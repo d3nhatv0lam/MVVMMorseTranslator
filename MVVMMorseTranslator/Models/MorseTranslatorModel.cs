@@ -99,8 +99,19 @@ namespace MVVMMorseTranslator.Models
             {' ', "/"},
         };
 
+
         private bool _alphachanged = false;
         private bool _morsechanged = false;
+
+        public String GetMorseOfChar(char chr)
+        {
+            
+            if (_morseCodeDictionary.ContainsKey(chr))
+            {
+                return _morseCodeDictionary[chr];
+            }
+            return String.Empty;
+        }
 
         private void Changed(String code)
         {
