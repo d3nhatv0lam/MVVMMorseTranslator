@@ -69,6 +69,11 @@ namespace MVVMMorseTranslator.Models
         }
         ~MorseAudioModel()
         {
+
+        }
+
+        public void CleanMorseAudioModel()
+        {
             StopAudio();
             DeleteMusicFromDisk();
         }
@@ -278,7 +283,7 @@ namespace MVVMMorseTranslator.Models
             }
         }
 
-        private void StopAudio()
+        public void StopAudio()
         {
             if (_isPlayingMorseAudio)
             {
@@ -286,6 +291,7 @@ namespace MVVMMorseTranslator.Models
                 _morseMediaPlayer.Stop();
                 _morseMediaPlayer.Close();
             }
+
         }
 
 

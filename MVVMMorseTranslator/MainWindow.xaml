@@ -10,6 +10,8 @@
         mc:Ignorable="d"
         Height="550"
         Width="800"
+        MinHeight="550"
+        MinWidth="600"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"

@@ -34,10 +34,63 @@
             
 
         </Style>
+
+        <Style x:Key="LabelTileStyle"
+               TargetType="{x:Type Label}"
+               BasedOn="{StaticResource GBLabelStyle}">
+
+            <Setter Property="Width"
+                    Value="auto" />
+
+            <Setter Property="Height"
+                    Value="auto" />
+
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+
+            <Setter Property="FontSize"
+                    Value="25" />
+
+        </Style>
+
+        <Style x:Key="TextBlockStyle"
+               TargetType="{x:Type TextBlock}"
+               BasedOn="{StaticResource GBTextBlockStyle}">
+
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+
+            <Setter Property="FontSize"
+                    Value="30" />
+
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+
+            <Setter Property="Margin"
+                    Value="5 0 0 0" />
+
+            <Setter Property="FontWeight"
+                    Value="Regular" />
+
+            <Setter Property="FontFamily"
+                    Value="Times New Roman" />
+
+
+
+        </Style>
+
     </UserControl.Resources>
     
     
     <Grid Background="{DynamicResource SecundaryBackgoundColor}">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
@@ -54,17 +107,60 @@
                   SnapsToDevicePixels="True"
                   Margin="10 0 0 0"
                   Data="M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z" />
-            <!--<fa:FontAwesome Icon="Users"
-                            FontSize="80"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Margin="10 0 0 0"
-                            Foreground="{DynamicResource TextTertiaryColor}"></fa:FontAwesome>-->
 
             <Label Grid.Row="0"
                    Content="About Application" Style="{DynamicResource AboutTitle}"
                    ></Label>
         </StackPanel>
+
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+
+                <Label FontWeight="Bold"
+                       Style="{DynamicResource LabelTileStyle}">
+
+                    <TextBlock Text="{Binding AppPowered}"
+                               TextDecorations="Underline" />
+                </Label>
+
+                <TextBlock Text="{Binding AppDetails}"
+                           Style="{DynamicResource TextBlockStyle}"
+                          />
+
+                <Label FontWeight="Bold"
+                       Style="{DynamicResource LabelTileStyle}">
+                    <TextBlock Text="{Binding Features}"
+                               TextDecorations="Underline" />
+                </Label>
+
+                <StackPanel Orientation="Vertical">
+
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}"
+                               BasedOn="{StaticResource TextBlockStyle}">
+                            <Setter Property="Margin"
+                                    Value="0 5 0 0 " />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <TextBlock Text="{Binding Feature1}"
+                              />
+
+                    <TextBlock Text="{Binding Feature2}"
+                               />
+
+                    <TextBlock Text="{Binding Feature3}"
+                                />
+
+                    <TextBlock Text="{Binding Feature4}"
+                               />
+                    
+                </StackPanel>
+
+                
+
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </UserControl>

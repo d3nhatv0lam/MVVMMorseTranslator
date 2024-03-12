@@ -112,8 +112,6 @@
             <Setter Property="FontWeight"
                     Value="Regular" />
 
-
-
         </Style>
 
 
@@ -155,6 +153,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
+                    
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0"
                        Content="{Binding Person1}"
@@ -170,20 +169,43 @@
             </Grid>
 
             <Grid Grid.Row="2">
+
+                
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
 
-                <Label Grid.Column="0"
+                <Label x:Name="hiddenPerson" Grid.Column="0"
                        Content="{Binding Person2}"
                        FontWeight="Bold"
                        Style="{DynamicResource LabelTileStyle}" />
+                
+                
+                <Grid Grid.Column="1">
 
-                <TextBlock Grid.Column="1"
-                           Text="{Binding Reason2}"
-                           Style="{DynamicResource TextBlockStyle}" />
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Grid}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=hiddenPerson, Path=IsMouseOver}"
+                                             Value="True">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Resources>
+
+                    <TextBlock Text="{Binding Reason2}"
+                               Style="{DynamicResource TextBlockStyle}" />
+                </Grid>
+                
 
             </Grid>
 

@@ -110,6 +110,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
                 {
                     _closeApp = new RelayCommand(() =>
                     {
+                        ((MorseTranslatorViewModel)PageViewModels[0]).CleanMorseAudioModel.Execute(null);
                         Application.Current.Shutdown();
                     });
                 }
@@ -173,6 +174,7 @@ namespace MVVMMorseTranslator.ViewModels.Base
                     _dragMoveWindow = new RelayCommand(() =>
                     {
                         Application.Current.MainWindow.DragMove();
+                        Debug.WriteLine(Application.Current.MainWindow.Height.ToString() + " " + Application.Current.MainWindow.Width.ToString());
                     });
                 }
                 return _dragMoveWindow;

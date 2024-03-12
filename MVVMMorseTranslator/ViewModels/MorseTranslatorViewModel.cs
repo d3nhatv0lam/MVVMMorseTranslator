@@ -38,12 +38,11 @@ namespace MVVMMorseTranslator.ViewModels
         };
 
         private ICommand _connection;
+        private ICommand _cleanMorseAudioModel;
         private ICommand _playMorseAudio;
         private ICommand _loadAlphabetAudioText;
         private ICommand _loadMorseAudioText;
         private ICommand _trontronVN;
-
-
 
 
         public Dictionary<String, String> ConnectionLink
@@ -52,11 +51,10 @@ namespace MVVMMorseTranslator.ViewModels
         }
 
 
-
         public String Alphabet
         {
             get => _morse.Alphabet;
-               
+
             set
             {
                 _morse.Alphabet = value;
@@ -91,7 +89,7 @@ namespace MVVMMorseTranslator.ViewModels
         public int WPM
         {
             get => _morseAudio.WPM;
-            set 
+            set
             {
                 _morseAudio.WPM = value;
             }
@@ -119,6 +117,18 @@ namespace MVVMMorseTranslator.ViewModels
             }
         }
 
+        public ICommand CleanMorseAudioModel
+        {
+            get
+            {
+                if (_cleanMorseAudioModel == null)
+                {
+                    _cleanMorseAudioModel = new RelayCommand(() => _morseAudio.CleanMorseAudioModel());
+                }
+                return _cleanMorseAudioModel;
+            }
+        }
+
         public ICommand PlayMorseAudio
         {
             get
@@ -127,14 +137,13 @@ namespace MVVMMorseTranslator.ViewModels
                 {
                     _playMorseAudio = new RelayCommand(() =>
                     {
-                        Alphabet = Alphabet;
                         if (!_morseAudio._isCreateTransAudio)
                         {
+                            Alphabet = Alphabet;
                             _morseAudio.CreateTransAudio(MorseCode);
                         }
 
                         _morseAudio.PlayTransAudio(value => IsPlayingMorseAudio = value);
-
                     });
                 }
                 return _playMorseAudio;
@@ -182,7 +191,7 @@ namespace MVVMMorseTranslator.ViewModels
 
         public MorseTranslatorViewModel()
         {
-           
+
         }
 
         private CancellationTokenSource cts_morse;
@@ -238,10 +247,10 @@ namespace MVVMMorseTranslator.ViewModels
                 cts_morse = null;
                 textBlock.Text = String.Empty;
             }
-            
+
         }
 
-        private async Task ColorAlphabetText(TextBlock textBlock , CancellationToken token)
+        private async Task ColorAlphabetText(TextBlock textBlock, CancellationToken token)
         {
             String AlphabetText = Alphabet.ToUpper();
 
@@ -298,7 +307,7 @@ namespace MVVMMorseTranslator.ViewModels
             }
         }
 
-        private async Task ColorMorseText(TextBlock textBlock , CancellationToken token)
+        private async Task ColorMorseText(TextBlock textBlock, CancellationToken token)
         {
             for (int i = 0; i < MorseCode.Length; i++)
             {
@@ -329,7 +338,7 @@ namespace MVVMMorseTranslator.ViewModels
                     {
                         timeDelay += 2 * _morseAudio.RushWait;
                     }
-                    else 
+                    else
 
                     if (MorseCode[i] is '.' || MorseCode[i] is '-')
                     {
@@ -344,7 +353,7 @@ namespace MVVMMorseTranslator.ViewModels
                     });
 
 
-                 await Task.Delay(timeDelay);
+                await Task.Delay(timeDelay);
             }
 
         }
